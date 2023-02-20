@@ -1,0 +1,16 @@
+python-dotenv
+fastapi
+pytest
+pymongo
+uvicorn[standard]
+pydantic[email]
+pycryptodome
+httpx
+bcrypt
+pycryptodomex
+Historic-Crypto
+pandas
+python-multipart
+requests
+feedparser
+cryptography

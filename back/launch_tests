@@ -1,0 +1,4 @@
+#!/bin/bash
+
+pytest
+python3 -m unittest tests_db.py
