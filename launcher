@@ -1,4 +1,0 @@
-#!/bin/bash
-
-python3 builder.py
-docker-compose up --build

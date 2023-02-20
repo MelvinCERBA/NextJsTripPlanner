@@ -17,6 +17,10 @@ Crud = Crud()
 Validator = Validator()
 Formatter = Formatter(Authentification)
 
+@router.get("/decode")
+async def get_decode(token: str):
+    return (Authentification.decrypt(token))
+
 @router.post("/register")
 async def post_regiser(credentials: dict):
     user = None
