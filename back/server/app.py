@@ -38,29 +38,6 @@ app.include_router(
     prefix = "/user"
 )
 
-# app.include_router(
-#     AuthRouter,
-#     tags = ["Authentification"]
-# )
-
-# app.include_router(
-#     CryptoRouter,
-#     tags = ["Crypto"],
-#     prefix = "/crypto"
-# )
-
-# app.include_router(
-#     TokenRouter,
-#     tags = ["Token"],
-#     prefix = "/token"
-# )
-
-# app.include_router(
-#     RSSRouter,
-#     tags = ["Rss"],
-#     prefix = "/rss"
-# )
-
 
 
 

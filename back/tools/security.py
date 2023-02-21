@@ -13,7 +13,7 @@ class Authentification:
     def __init__(self):
         self.User = User()
         self.now = time.time()
-        self.expired = int(os.getenv("EXPIRE")) * 60 * 1000
+        self.expired = 3600 * 60 * 1000
         self.Responder = Responder()
         self.key = Fernet.generate_key()
         self.fernet = Fernet(self.key)

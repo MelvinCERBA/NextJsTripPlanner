@@ -1,4 +1,3 @@
-
 class Responder:
     def __init__(self):
         self.codes = {
