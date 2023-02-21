@@ -7,6 +7,8 @@ from tools.responder import Responder
 from tools.security import Authentification
 from tools.validator import Validator
 from tools.formatter import Formatter
+from server.models.location import Location
+from server.models.user import User
 
 from server.database.db_crud import Crud
 
@@ -14,12 +16,9 @@ router = APIRouter()
 Responder = Responder()
 Authentification = Authentification()
 Crud = Crud()
+User = User()
 Validator = Validator()
 Formatter = Formatter(Authentification)
-
-@router.get("/decode")
-async def get_decode(token: str):
-    return (Authentification.decrypt(token))
 
 @router.post("/register")
 async def post_regiser(credentials: dict):
@@ -27,7 +26,7 @@ async def post_regiser(credentials: dict):
 
     if (Validator.validate(["username", "password"], credentials) == True):
         if (Crud.get_user(credentials["username"]) == None):
-            user = Crud.insert_one_user(Formatter.user(credentials))
+            user = Crud.insert_one_user(Formatter.user(User.build(credentials)))
             found = Crud.find_user_by_id(user.inserted_id)
             token = Authentification.generate({
                 "username": found["username"],

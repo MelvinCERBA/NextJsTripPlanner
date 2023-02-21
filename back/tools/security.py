@@ -2,6 +2,7 @@ import os
 import time
 import json
 import bcrypt
+import base64
 
 from cryptography.fernet import Fernet
 

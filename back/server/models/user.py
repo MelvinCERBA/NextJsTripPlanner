@@ -1,13 +1,20 @@
-
 class User:
     def __init__(self):
-        pass
+        self.data = {
+            "username": None,
+            "password": None,
+            "history": []
+        }
+
+    def build(self, credentials):
+        content = self.data
+
+        for key in credentials.keys():
+            content[key] = credentials[key]
+        return (content)
 
     def format(self):
-        return ({
-            "username": None,
-            "password": None
-        })
+        return (self.data)
 
     def validate(self, user):
         user_data = self.format()

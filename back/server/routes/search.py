@@ -11,6 +11,13 @@ Responder = Responder()
 Authentification = Authentification()
 
 @router.post("/")
-async def post_search(token: str):
-    return (token)
-    
+async def post_regiser():
+    token = Authentification.generate({
+        "username": "username",
+        "password": "password"
+    })
+
+    return (Responder.Send(
+        data = { "message": "ok" },
+        code = 200
+    ))

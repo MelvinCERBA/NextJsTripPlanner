@@ -3,8 +3,8 @@ from tools.connect_db import Database
 class Crud:
     def __init__(self):
         self.db = Database()
-        self.connect_db = self.db.Connect() #connect to the DB
-        self.user_collection = self.connect_db["users"] #create collection users
+        self.connect_db = self.db.Connect()
+        self.user_collection = self.connect_db["users"]
 
     def insert_one_user(self, user):
         return self.user_collection.insert_one(user)
@@ -36,54 +36,16 @@ class Crud:
     def count_user_collection(self):
         return self.user_collection.count_documents({})
 
-    def add_crypto(self, user, coins):
+    def add_history(self, user, location):
         user_replace = self.find_user(user)
         copy = self.find_user(user)
-        user_replace["profile"]["currencies"].append(coins)
+        user_replace["profile"]["history"].append(location)
+        
         return self.user_collection.replace_one(copy, user_replace)
 
-    def delete_crypto(self, user, coins):
+    def delete_history(self, user, location):
         user_replace = self.find_user(user)
         copy = self.find_user(user)
-        user_replace["profile"]["currencies"].remove(coins)
+        user_replace["profile"]["history"].remove(location)
+
         return self.user_collection.replace_one(copy, user_replace)
-
-    def add_rss(self, user, rss):
-        user_replace = self.find_user(user)
-        copy = self.find_user(user)
-        user_replace["profile"]["rss"].append(rss)
-        return self.user_collection.replace_one(copy, user_replace)
-
-    def delete_rss(self, user, rss):
-        user_replace = self.find_user(user)
-        copy = self.find_user(user)
-        user_replace["profile"]["rss"].remove(rss)
-        return self.user_collection.replace_one(copy, user_replace)
-
-    def add_authorized_rss(self, rss):
-        user_replace = self.find_admin()
-        copy = self.find_admin()
-        user_replace["authorized"]["rss"].append(rss)
-    
-        return self.user_collection.replace_one(copy, user_replace)
-
-    def delete_authorized_rss(self, rss):
-        user_replace = self.find_admin()
-        copy = self.find_admin()
-        user_coins_update["authorized"]["rss"].remove(rss)
-    
-        return self.user_collection.replace_one(copy, user_coins_update)
-
-    def add_authorized_crypto(self, coin):
-        user_replace = self.find_admin()
-        copy = self.find_admin()
-        user_replace["authorized"]["currencies"].append(coin)
-    
-        return self.user_collection.replace_one(copy, user_replace)
-
-    def delete_authorized_crypto(self, coin):
-        user_replace = self.find_admin()
-        copy = self.find_admin()
-        user_coins_update["authorized"]["currencies"].remove(coin)
-    
-        return self.user_collection.replace_one(copy, user_coins_update)

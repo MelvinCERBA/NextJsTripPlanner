@@ -13,7 +13,6 @@ def test_build_token():
     assert data["data"]["token"] != None
     assert data["message"] == "OK"
 
-
 def test_validate_no_header():
     response = client.get("/token/validate")
 
