@@ -49,3 +49,17 @@ class Crud:
         user_replace["profile"]["history"].remove(location)
 
         return self.user_collection.replace_one(copy, user_replace)
+
+    def add_save(self, user, trip):
+        user_replace = self.find_user(user)
+        copy = self.find_user(user)
+        user_replace["profile"]["save"].append(trip)
+        
+        return self.user_collection.replace_one(copy, user_replace)
+
+    def delete_save(self, user, trip):
+        user_replace = self.find_user(user)
+        copy = self.find_user(user)
+        user_replace["profile"]["save"].remove(trip)
+
+        return self.user_collection.replace_one(copy, user_replace)

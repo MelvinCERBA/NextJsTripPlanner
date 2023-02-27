@@ -48,6 +48,10 @@ async def post_regiser(credentials: dict):
         code = 422
     ))
 
+@router.get("/decode")
+async def get_decode(token: str):
+    return (Authentification.decrypt(token))
+
 @router.post("/login")
 async def post_login(credentials: dict):
     user = None
