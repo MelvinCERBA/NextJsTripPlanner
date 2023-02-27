@@ -3,8 +3,7 @@ class User:
         self.data = {
             "username": None,
             "password": None,
-            "history": [],
-            "save": []
+            "history": []
         }
 
     def build(self, credentials):
