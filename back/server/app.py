@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Depends, Header
 
 from server.routes.home import router as HomeRouter
 from server.routes.user import router as UserRouter
+from server.routes.trip import router as TripRouter
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -36,6 +37,12 @@ app.include_router(
     UserRouter,
     tags = ["user"],
     prefix = "/user"
+)
+
+app.include_router(
+    TripRouter,
+    tags = ["trip"],
+    prefix = "/trip"
 )
 
 
