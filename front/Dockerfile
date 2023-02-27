@@ -5,6 +5,7 @@ WORKDIR /app
 
 COPY . /app/
 
-RUN npm install
+RUN pnpm i
+RUN pnpm build
 
-CMD [ "npm", "run", "dev" ]
+CMD [ "pnpm", "run", "start" ]

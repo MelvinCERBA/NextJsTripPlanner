@@ -1,34 +1,33 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
-  options: {
-    safelist: ['dark'], //specific classes
-  },
-  theme: {
-    extend: {
-      fontFamily: {
-        'h1': "'Monoton', cursive;",
-        'h2': "'Fugaz One', cursive;",
-        'h3': "'Mulish', sans-serif;",
-      },
+  content: ["./src/**/*.{html,js,jsx}"],
+  theme: (module.exports = {
+    theme: {
       colors: {
-        'black-light': '#3A3A3A',
-        'white-light': '#FDF8F1',
-        'red-light': '#FA4238',
-        'black-dark': '#0A1627',
-        'gray-dark': '#3A3A3A',
-        'red-dark': '#FE0039',
-        'slate-dark': '#C1C1C1',
+        blue: "#1fb6ff",
+        pink: "#ff49db",
+        orange: "#ff7849",
+        green: "#13ce66",
+        "gray-dark": "#273444",
+        gray: "#8492a6",
+        "gray-light": "#d3dce6",
+        "orange-main": "#f3a83c",
+        "orange-secondary": "#FBEAAB",
+      },
+      fontFamily: {
+        sans: ["Graphik", "sans-serif"],
+        serif: ["Merriweather", "serif"],
+      },
+      extend: {
+        spacing: {
+          128: "32rem",
+          144: "36rem",
+        },
+        borderRadius: {
+          "4xl": "2rem",
+        },
       },
     },
-  },
-  plugins: [
-    'tailwindcss',
-    'postcss-preset-env',
-  ],
-}
+  }),
+  plugins: [],
+};
