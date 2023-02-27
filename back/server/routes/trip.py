@@ -1,4 +1,5 @@
 import os
+import json
 from urllib.parse import urlencode
 
 from fastapi import FastAPI, Request, Depends, Response, APIRouter, Header
@@ -22,13 +23,11 @@ Responder = Responder()
 
 @router.get("/search")
 async def get_search(x_token: Union[List[str], None] = Header(default=None), location: str = None):
-    headers = x_token
     credentials = None
     
-    if (Headers.Check(headers) == True):
-        credentials = Authentification.decrypt(headers[0])
-        print(credentials)
-        Crud.add_history(headers[0], None)
+    if (Headers.Check(x_token) == True):
+        credentials = json.loads(Authentification.decrypt(x_token[0]))
+        result = Crud.add_history(credentials["user"], location)
 
         return (Responder.Send(
             data = { "message": "ok" },
