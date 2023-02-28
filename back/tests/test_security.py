@@ -4,3 +4,6 @@ from tools.security import Authentification
 def test_security():
 
     authentification = Authentification()
+
+    #test of generate
+    
