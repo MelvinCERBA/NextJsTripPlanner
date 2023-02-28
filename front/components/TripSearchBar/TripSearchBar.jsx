@@ -1,9 +1,9 @@
 import { Input, Divider } from "..";
 import { BsSearch } from "react-icons/bs";
 import { MdFilterAlt } from "react-icons/md";
-import ReactBreakpoints from 'react-breakpoints'
+// import ReactBreakpoints from 'react-breakpoints'
 import { BREAKPOINTS } from "../../commands";
-import { Media } from "react-breakpoints";
+// import { Media } from "react-breakpoints";
 import useBreakpoint from 'use-breakpoint';
 
 export const TripSearchBar = () => {
