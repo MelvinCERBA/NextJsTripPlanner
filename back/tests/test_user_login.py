@@ -1,9 +1,11 @@
-from fastapi.testclient import TestClient
-
-from server.app import app
-
+import os
 import random
 import requests
+
+os.environ["private_key"] = "00000000000000000000000000000000"
+
+from fastapi.testclient import TestClient
+from server.app import app
 
 client = TestClient(app)
 

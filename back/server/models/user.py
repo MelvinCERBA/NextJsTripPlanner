@@ -21,6 +21,6 @@ class User:
         user_data = self.format()
 
         for key in user_data.keys():
-            if (key not in user.keys()):
+            if (key not in user_data.keys()):
                 return (False)
         return (True)

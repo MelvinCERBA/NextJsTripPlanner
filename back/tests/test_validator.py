@@ -1,3 +1,7 @@
+import os
+
+os.environ["private_key"] = "00000000000000000000000000000000"
+
 from tools.validator import Validator
 
 #test for validator.py
