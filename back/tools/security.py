@@ -28,7 +28,10 @@ class Authentification:
         return (self.fernet.encrypt(str.encode(data)))
 
     def __decode__(self, data: str):
-        return (self.fernet.decrypt(data).decode())
+        try:
+            return (self.fernet.decrypt(data).decode())
+        except:
+            return (None)
 
     def generate(self, user: dict):
         token = None
