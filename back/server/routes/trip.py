@@ -139,6 +139,7 @@ async def get_roadtrips(x_token: Union[List[str], None] = Header(default=None), 
             },
             code = 400
         ))
+    
     return (Responder.Send(
         data = {
             "message": "missing token header"
