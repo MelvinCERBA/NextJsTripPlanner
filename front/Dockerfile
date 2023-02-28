@@ -5,6 +5,8 @@ WORKDIR /app
 
 COPY . /app/
 
+RUN npm i -g pnpm
+
 RUN pnpm i
 RUN pnpm build
 
