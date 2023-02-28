@@ -13,10 +13,10 @@ class Crud:
         return self.user_collection.insert_many(array_user)
 
     def update_user(self, user):
-        return self.user_collection.update_one({"_idid": user["id"]}, { "$set": { "user": user}})
+        return self.user_collection.update_one({"_id": user["id"]}, { "$set": { "user": user}})
 
     def replace_user(self, user):
-        return self.user_collection.replace_one({"_idid": user["id"]}, user)
+        return self.user_collection.replace_one({"_id": user["id"]}, user)
 
     def delete_user(self, id):
         return self.user_collection.delete_one({"_id": id})
@@ -30,22 +30,36 @@ class Crud:
     def find_admin(self):
         return self.user_collection.find_one({"role": "admin"})
     
-    def get_user(self, username):
+    def get_user(self, username: str):
         return self.user_collection.find_one({"username": username})
 
     def count_user_collection(self):
         return self.user_collection.count_documents({})
 
     def add_history(self, user, location):
-        user_replace = self.find_user(user)
-        copy = self.find_user(user)
-        user_replace["profile"]["history"].append(location)
+        user_replace = self.get_user(user)
+        copy = self.get_user(user)
+        user_replace["history"].append(location)
         
         return self.user_collection.replace_one(copy, user_replace)
 
     def delete_history(self, user, location):
-        user_replace = self.find_user(user)
-        copy = self.find_user(user)
-        user_replace["profile"]["history"].remove(location)
+        user_replace = self.get_user(user)
+        copy = self.get_user(user)
+        user_replace["history"].remove(location)
+
+        return self.user_collection.replace_one(copy, user_replace)
+
+    def add_save(self, user, trip):
+        user_replace = self.get_user(user)
+        copy = self.get_user(user)
+        user_replace["save"].append(trip)
+        
+        return self.user_collection.replace_one(copy, user_replace)
+
+    def delete_save(self, user, trip):
+        user_replace = self.get_user(user)
+        copy = self.get_user(user)
+        user_replace["save"].remove(trip)
 
         return self.user_collection.replace_one(copy, user_replace)

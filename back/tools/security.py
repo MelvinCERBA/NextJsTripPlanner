@@ -15,7 +15,7 @@ class Authentification:
         self.now = time.time()
         self.expired = 3600 * 60 * 1000
         self.Responder = Responder()
-        self.key = Fernet.generate_key()
+        self.key = base64.b64encode(str(os.getenv("private_key")).encode('utf-8'))
         self.fernet = Fernet(self.key)
 
     def __validate_date__(self, start, end):
@@ -28,7 +28,7 @@ class Authentification:
         return (self.fernet.encrypt(str.encode(data)))
 
     def __decode__(self, data: str):
-        return (self.fernet.decrypt(data))
+        return (self.fernet.decrypt(data).decode())
 
     def generate(self, user: dict):
         token = None
