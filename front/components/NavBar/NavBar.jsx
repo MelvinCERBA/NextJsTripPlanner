@@ -1,33 +1,25 @@
-import {Button} from '../Button'
-import logo from '/public/logo-no-background.svg'
-import { useContext } from 'react';
-import { useEffect, useState } from 'react';
+import {Button} from '../Button';
+import logo from './../../public/logo-no-background.png';
+// import ReactBreakpoints from 'react-breakpoints'
+import { BREAKPOINTS } from "../../commands";
+// import { Media } from "react-breakpoints";
+import useBreakpoint from 'use-breakpoint';
+import Image from 'next/image';
 
 export function NavBar() {
-    const [width, setWidth] = useState(0);;
-    const breakpoint = 620;
-
-    useEffect(() => {
-        const handleWindowResize = () => {
-            setWidth(window.innerWidth);
-        }
-      
-        window.addEventListener("resize", handleWindowResize);
-        return () => window.removeEventListener("resize", handleWindowResize);
-    }, [])
-
+    const { breakpoint } = useBreakpoint(BREAKPOINTS, "md")
     return (
-        <div className="px-8 py-3 shadow-md max-h-full max-w-full bg-white flex flex-row place-content-between ">
-            <div id="Logo" className="flex flex-row place-items-center">
-                <img id="LogoImg" src={logo} alt="Logo"/>
-                <p id="SiteTitle" className="flex font-Montaga text-xl">Trip Tise</p>
+        <div className="px-8 py-3 shadow-md h-20 max-w-full bg-white flex flex-row place-content-between ">
+            <div id="Logo" className="flex flex-row max-h-20 place-items-center">
+                <Image src={logo} height={50} alt="Logo"/>
+                <p id="SiteTitle" className="flex ml-5 font-Montaga text-xl">Trip Tise</p>
             </div>
-            { width < breakpoint ? 
+            { BREAKPOINTS[breakpoint] < BREAKPOINTS.xs ? 
                 <></> : 
-                <div id="menu" className="flex flex-row justify-center align-center max-h-15">
-                    <Button id="BtnLogIn" className="mr-5" label="Se connecter" alternate={false}></Button>
+                <div id="menu" className="flex flex-row shrink justify-center align-center max-h-15">
+                    <Button id="BtnLogIn" className="mr-5" label="Se connecter" alternate={true}></Button>
                     <div id="buffer" className="px-5"></div>
-                    <Button id="BtnSignIn" label="S'enregistrer" alternate={true}></Button>
+                    <Button id="BtnSignIn" label="S'enregistrer" alternate={false}></Button>
                 </div>
             }
         </div>
