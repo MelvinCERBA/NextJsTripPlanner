@@ -1,3 +1,4 @@
 import { joinClasses, BREAKPOINTS } from "./utils";
+import { useResponsive } from "./hooks";
 
-export { joinClasses, BREAKPOINTS }
+export { joinClasses, BREAKPOINTS, useResponsive }
