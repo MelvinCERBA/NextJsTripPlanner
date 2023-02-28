@@ -149,38 +149,40 @@ def test_trip_save():
     assert json_data_bad_with_trips_tocken["data"]["message"] == "invalid token"
     assert json_data_bad_with_trips_tocken["code"] == 400
 
-    # tocken_with_bad_trips_response = requests.post("http://0.0.0.0:8081/trip/save", 
-    #     headers = { "X-Token": "gAAAAABj_f488WROHxmD8IQvda4aI6-CTHMzY1P1HdPq3leAK7AxT-pNkYAIX3Zj-pP1c_AjIYQBex2kTcTUi4jCN8580QsvUdQkBgz_LBZ_pu883CunUbkMQyi6BJCCZpusATvC0PRQHLj0pW3ga8vtL9ZrwbSVxGFlhqiRQy4akfDKuT4RTgoU7B9bx7IDIOjfPWOuoJOv" },
-    #     json = {
-    #         "trips": {
-    #             "travel": [
-    #                 {
-    #                     "name": "Paris",
-    #                     "start": "0000",
-    #                     "end": "0000",
-    #                     "events": [
-    #                         {
-    #                             "name": "visite de la tour eiffel"
-    #                         },
-    #                         {
-    #                             "name": "visite de la tour eiffel"
-    #                         }
-    #                     ]
-    #                 },
-    #                 {
-    #                     "name": "Marseille",
-    #                     "start": "0000",
-    #                     "end": "0000",
-    #                     "events": [
-    #                     ]
-    #                 }
-    #             ]
-    #         }
-    #     }
-    # )
+    tocken_with_bad_trips_response = requests.post("http://0.0.0.0:8081/trip/save", 
+        headers = { "X-Token": "gAAAAABj_f488WROHxmD8IQvda4aI6-CTHMzY1P1HdPq3leAK7AxT-pNkYAIX3Zj-pP1c_AjIYQBex2kTcTUi4jCN8580QsvUdQkBgz_LBZ_pu883CunUbkMQyi6BJCCZpusATvC0PRQHLj0pW3ga8vtL9ZrwbSVxGFlhqiRQy4akfDKuT4RTgoU7B9bx7IDIOjfPWOuoJOv" },
+        json = {
+            "trips": {
+                "travel": [
+                    {
+                        "name": "Paris",
+                        "start": "0000",
+                        "end": "0000",
+                        "events": [
+                            {
+                                "name": "visite de la tour eiffel"
+                            },
+                            {
+                                "name": "visite de la tour eiffel"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Marseille",
+                        "start": "0000",
+                        "end": "0000",
+                        "events": [
+                        ]
+                    }
+                ]
+            }
+        }
+    )
 
-    # json_data_tocken_with_bad_trips = tocken_with_bad_trips_response.json()
-    # assert json_data_tocken_with_bad_trips == {}
+    json_data_tocken_with_bad_trips = tocken_with_bad_trips_response.json()
+    assert json_data_tocken_with_bad_trips["data"]["message"] == "ok"
+    assert json_data_tocken_with_bad_trips["data"]["result"] == "roadtrip saved"
+    assert json_data_tocken_with_bad_trips["code"] == 200
 
     tocken_with_trips_response = requests.post("http://0.0.0.0:8081/trip/save", 
         headers = { "X-Token": "gAAAAABj_f488WROHxmD8IQvda4aI6-CTHMzY1P1HdPq3leAK7AxT-pNkYAIX3Zj-pP1c_AjIYQBex2kTcTUi4jCN8580QsvUdQkBgz_LBZ_pu883CunUbkMQyi6BJCCZpusATvC0PRQHLj0pW3ga8vtL9ZrwbSVxGFlhqiRQy4akfDKuT4RTgoU7B9bx7IDIOjfPWOuoJOv" },
