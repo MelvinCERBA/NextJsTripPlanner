@@ -1,2 +1,3 @@
 import { joinClasses } from "./joinClasses";
-export { joinClasses }
+import { BREAKPOINTS } from "./breakpoints";
+export { joinClasses, BREAKPOINTS };

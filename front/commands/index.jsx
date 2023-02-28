@@ -1,2 +1,3 @@
-import { joinClasses } from "./utils";
-export { joinClasses }
+import { joinClasses, BREAKPOINTS } from "./utils";
+
+export { joinClasses, BREAKPOINTS }
