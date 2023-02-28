@@ -139,3 +139,8 @@ cython_debug/
 
 # Text Editor
 .vscode
+
+# utils melvin
+test.js
+todo.txt
+
