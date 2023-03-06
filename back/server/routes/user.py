@@ -54,10 +54,6 @@ async def post_regiser(credentials: dict):
         code = 422
     ))
 
-@router.get("/decode")
-async def get_decode(token: str):
-    return (Authentification.decrypt(token))
-
 @router.get("/profile")
 async def get_profile(x_token: Union[List[str], None] = Header(default=None)):
     if (Headers.Check(x_token) == True):
