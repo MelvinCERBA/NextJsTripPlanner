@@ -56,11 +56,21 @@ async def post_regiser(credentials: dict):
 
 @router.get("/profile")
 async def get_profile(x_token: Union[List[str], None] = Header(default=None)):
+    decrypted = None
+
     if (Headers.Check(x_token) == True):
-        return (Responder.Send(
-            data = { "message": json.loads(Authentification.decrypt(x_token[0])) },
-            code = 200
-        ))
+        if (len(x_token) > 0):
+            if (x_token[0] != None):
+                decrypted = Authentification.decrypt(x_token[0])
+                if (decrypted != None):
+                    return (Responder.Send(
+                        data = { "message": json.loads(decrypted) },
+                        code = 200
+                    ))
+            return (Responder.Send(
+                data = { "message": "invalid token header" },
+                code = 422
+            ))
     return (Responder.Send(
         data = { "message": "missing token header" },
         code = 400

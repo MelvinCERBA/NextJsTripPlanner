@@ -69,7 +69,7 @@ def test_user_profil_bad_token():
         headers = { "X-Token": "Bonjour" }
     )
 
-    assert response_with_bad_token.status_code == 500
+    assert response_with_bad_token.status_code == 200
 
 def test_user_profil_no_token():
     json_response_no_token = {}
@@ -84,11 +84,11 @@ def test_user_profil_no_token():
 def test_user_profil_good_token():
     json_response_no_token = {}
     response_with_no_token = requests.get("http://0.0.0.0:8081/user/profile",
-        headers = { "X-Token": "gAAAAABj_f488WROHxmD8IQvda4aI6-CTHMzY1P1HdPq3leAK7AxT-pNkYAIX3Zj-pP1c_AjIYQBex2kTcTUi4jCN8580QsvUdQkBgz_LBZ_pu883CunUbkMQyi6BJCCZpusATvC0PRQHLj0pW3ga8vtL9ZrwbSVxGFlhqiRQy4akfDKuT4RTgoU7B9bx7IDIOjfPWOuoJOv" }
+        headers = { "X-Token": "gAAAAABkBwPpGQ7HGxP0I2c2lSeoxu3oH7U6ME4bwXxxfyAWL2kYWi6NwkhkjkVOOKFoS57DNMbqNI4KbfRLECmHmy3iMb7TQ2FzK0xxCDGJGyOht0H91ZinBr_f1AW_6tdAzoCgTxqqzYKIulhSm_CWXRk9MFVoDW6MmZ8UNfnvXIvUdvz8dqdST-gR1Mo-K4vxyJTOk1MG" }
     )
 
     assert response_with_no_token.status_code == 200
     json_response_no_token = response_with_no_token.json()
 
-    assert json_response_no_token["data"]["message"]["user"] == "test"
+    assert json_response_no_token["data"]["message"]["user"] == "Jonathon"
     assert json_response_no_token["code"] == 200
