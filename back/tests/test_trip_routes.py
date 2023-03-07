@@ -17,7 +17,7 @@ def test_trip_location():
     assert bad_response.status_code != 404
 
     response = requests.get("http://0.0.0.0:8081/trip/location?location=Paris", 
-        headers = { "X-Token": "gAAAAABj_f488WROHxmD8IQvda4aI6-CTHMzY1P1HdPq3leAK7AxT-pNkYAIX3Zj-pP1c_AjIYQBex2kTcTUi4jCN8580QsvUdQkBgz_LBZ_pu883CunUbkMQyi6BJCCZpusATvC0PRQHLj0pW3ga8vtL9ZrwbSVxGFlhqiRQy4akfDKuT4RTgoU7B9bx7IDIOjfPWOuoJOv" }
+        headers = { "X-Token": "gAAAAABkBwPpGQ7HGxP0I2c2lSeoxu3oH7U6ME4bwXxxfyAWL2kYWi6NwkhkjkVOOKFoS57DNMbqNI4KbfRLECmHmy3iMb7TQ2FzK0xxCDGJGyOht0H91ZinBr_f1AW_6tdAzoCgTxqqzYKIulhSm_CWXRk9MFVoDW6MmZ8UNfnvXIvUdvz8dqdST-gR1Mo-K4vxyJTOk1MG" }
     )
 
     assert response.status_code == 200
@@ -26,7 +26,7 @@ def test_trip_location():
 def test_trip_event():
 
     response = requests.get("http://0.0.0.0:8081/trip/envent?longitude=0.0&latitude=0.0", 
-        headers = { "X-Token": "gAAAAABj_f488WROHxmD8IQvda4aI6-CTHMzY1P1HdPq3leAK7AxT-pNkYAIX3Zj-pP1c_AjIYQBex2kTcTUi4jCN8580QsvUdQkBgz_LBZ_pu883CunUbkMQyi6BJCCZpusATvC0PRQHLj0pW3ga8vtL9ZrwbSVxGFlhqiRQy4akfDKuT4RTgoU7B9bx7IDIOjfPWOuoJOv"}
+        headers = { "X-Token": "gAAAAABkBwPpGQ7HGxP0I2c2lSeoxu3oH7U6ME4bwXxxfyAWL2kYWi6NwkhkjkVOOKFoS57DNMbqNI4KbfRLECmHmy3iMb7TQ2FzK0xxCDGJGyOht0H91ZinBr_f1AW_6tdAzoCgTxqqzYKIulhSm_CWXRk9MFVoDW6MmZ8UNfnvXIvUdvz8dqdST-gR1Mo-K4vxyJTOk1MG"}
     )
 
     assert response.status_code == 404
@@ -52,7 +52,7 @@ def test_trip_raodtrips():
     assert json_data_bad_tocken["code"] == 400
     
     response = requests.get("http://0.0.0.0:8081/trip/roadtrips?city=Paris", 
-        headers = { "X-Token": "gAAAAABj_f488WROHxmD8IQvda4aI6-CTHMzY1P1HdPq3leAK7AxT-pNkYAIX3Zj-pP1c_AjIYQBex2kTcTUi4jCN8580QsvUdQkBgz_LBZ_pu883CunUbkMQyi6BJCCZpusATvC0PRQHLj0pW3ga8vtL9ZrwbSVxGFlhqiRQy4akfDKuT4RTgoU7B9bx7IDIOjfPWOuoJOv"}
+        headers = { "X-Token": "gAAAAABkBwPpGQ7HGxP0I2c2lSeoxu3oH7U6ME4bwXxxfyAWL2kYWi6NwkhkjkVOOKFoS57DNMbqNI4KbfRLECmHmy3iMb7TQ2FzK0xxCDGJGyOht0H91ZinBr_f1AW_6tdAzoCgTxqqzYKIulhSm_CWXRk9MFVoDW6MmZ8UNfnvXIvUdvz8dqdST-gR1Mo-K4vxyJTOk1MG"}
     )
 
     json_data = response.json()
@@ -150,7 +150,7 @@ def test_trip_save():
     assert json_data_bad_with_trips_tocken["code"] == 400
 
     tocken_with_bad_trips_response = requests.post("http://0.0.0.0:8081/trip/save", 
-        headers = { "X-Token": "gAAAAABj_f488WROHxmD8IQvda4aI6-CTHMzY1P1HdPq3leAK7AxT-pNkYAIX3Zj-pP1c_AjIYQBex2kTcTUi4jCN8580QsvUdQkBgz_LBZ_pu883CunUbkMQyi6BJCCZpusATvC0PRQHLj0pW3ga8vtL9ZrwbSVxGFlhqiRQy4akfDKuT4RTgoU7B9bx7IDIOjfPWOuoJOv" },
+        headers = { "X-Token": "gAAAAABkBwPpGQ7HGxP0I2c2lSeoxu3oH7U6ME4bwXxxfyAWL2kYWi6NwkhkjkVOOKFoS57DNMbqNI4KbfRLECmHmy3iMb7TQ2FzK0xxCDGJGyOht0H91ZinBr_f1AW_6tdAzoCgTxqqzYKIulhSm_CWXRk9MFVoDW6MmZ8UNfnvXIvUdvz8dqdST-gR1Mo-K4vxyJTOk1MG" },
         json = {
             "trips": {
                 "travel": [
@@ -185,7 +185,7 @@ def test_trip_save():
     assert json_data_tocken_with_bad_trips["code"] == 200
 
     tocken_with_trips_response = requests.post("http://0.0.0.0:8081/trip/save", 
-        headers = { "X-Token": "gAAAAABj_f488WROHxmD8IQvda4aI6-CTHMzY1P1HdPq3leAK7AxT-pNkYAIX3Zj-pP1c_AjIYQBex2kTcTUi4jCN8580QsvUdQkBgz_LBZ_pu883CunUbkMQyi6BJCCZpusATvC0PRQHLj0pW3ga8vtL9ZrwbSVxGFlhqiRQy4akfDKuT4RTgoU7B9bx7IDIOjfPWOuoJOv" },
+        headers = { "X-Token": "gAAAAABkBwPpGQ7HGxP0I2c2lSeoxu3oH7U6ME4bwXxxfyAWL2kYWi6NwkhkjkVOOKFoS57DNMbqNI4KbfRLECmHmy3iMb7TQ2FzK0xxCDGJGyOht0H91ZinBr_f1AW_6tdAzoCgTxqqzYKIulhSm_CWXRk9MFVoDW6MmZ8UNfnvXIvUdvz8dqdST-gR1Mo-K4vxyJTOk1MG" },
         json = {
             "trips": {
                 "travel": [
