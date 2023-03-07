@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import useCookie from "react-use-cookie";
 import axios from "axios";
 
 export const useAuth = () => {
   const [userData, setUserData] = useCookie("user-data", null);
+  const [error, setError] = useState("");
 
   async function userDataHandler(username = "", password = "", params = {register: false}) {
     try {
@@ -20,15 +21,15 @@ export const useAuth = () => {
         const username = data.data.token;
         
         setUserData({username, token});
-      } catch (error) { 
-        error;
+      } catch (error) {
+        setError(error);
       }
     } catch (error) {
-      error;
+      setError(error);
     }
   }
 
-  if (userToken !== null) {}
+  // if (userData !== null) {}
 
-  return [userData, userDataHandler];
+  return [userData, userDataHandler, error];
 };

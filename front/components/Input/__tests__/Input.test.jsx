@@ -1,7 +1,7 @@
-/* eslint-disable no-undef */
 /**
  * @jest-environment jsdom
  */
+/* eslint-disable no-undef */
 
 import React from "react";
 
@@ -11,11 +11,32 @@ import "@testing-library/jest-dom";
 import Input from "../Input";
 import { act } from "@testing-library/react";
 
-test("loads and displays greeting", async () => {
-  render(<Input label="la con de ses morts" /> );
+const LABEL_VALUE = "simple_input";
+
+test("it change the input value", async () => {
+  const REPLACEMENT_TEXT = "Je veux plutôt ça !";
+  
+  render(<Input label={LABEL_VALUE} /> );
   await act(async () => {
-    await userEvent.type(screen.getByLabelText("la con de ses morts") , "la putain de ta race");
+    await userEvent.type(screen.getByLabelText(LABEL_VALUE) , REPLACEMENT_TEXT);
+  });
+  
+  expect(screen.getByLabelText(LABEL_VALUE).value).toBe(REPLACEMENT_TEXT);
+});
+
+test("it change the input value by the placeholder", async () => {
+  const PLACEHOLDER_VALUE = "simple_placeholder";
+
+  render(<Input label={LABEL_VALUE} placeholder={PLACEHOLDER_VALUE} /> );
+  await act(async () => {
+    await userEvent.type(screen.getByPlaceholderText(PLACEHOLDER_VALUE) , "la putain de ta race");
   });
 
-  expect(screen.getByLabelText("la con de ses morts").value).toBe("la putain de ta race");
+  expect(screen.getByLabelText(LABEL_VALUE).value).toBe("la putain de ta race");
+});
+
+test("test Input appearance @snapshots", async () => {
+  render(<Input label={LABEL_VALUE} /> );
+
+  expect(screen).toMatchSnapshot();
 });
