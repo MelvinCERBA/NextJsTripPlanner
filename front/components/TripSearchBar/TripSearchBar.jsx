@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Input, Divider } from "..";
 import { BsSearch } from "react-icons/bs";
 import { MdFilterAlt } from "react-icons/md";
@@ -5,7 +7,7 @@ import { useResponsive } from "../../commands";
 import { BREAKPOINTS } from "../../commands";
 
 export const TripSearchBar = () => {
-  const breakpoint = useResponsive()
+  const breakpoint = useResponsive();
   return (
     BREAKPOINTS[breakpoint] > BREAKPOINTS.xs ? (
       <div className="rounded-xl shadow-2xl px-8 py-5">
@@ -32,4 +34,4 @@ export const TripSearchBar = () => {
       </div>
     )
   );
-}
+};
