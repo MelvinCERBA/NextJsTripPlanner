@@ -27,8 +27,9 @@ Validator = Validator()
 Formatter = Formatter(Authentification)
 
 @router.post("/register")
-async def post_regiser(credentials: dict):
+async def post_regiser(credentials: dict, response: Response = None):
     user = None
+    responder = None
 
     if (Validator.validate(["username", "password"], credentials) == True):
         if (Crud.get_user(credentials["username"]) == None):
@@ -38,24 +39,28 @@ async def post_regiser(credentials: dict):
                 "username": found["username"],
                 "password": found["password"]
             })
-            return (Responder.Send(
+            responder = Responder.Send(
                 data = {
                     "message": "ok",
                     "token": token
                 },
                 code = 200
-            ))
-        return (Responder.Send(
-            data = { "message": "username already taken" },
-            code = 400
-        ))
-    return (Responder.Send(
-        data = { "message": "invalid credentials format" },
-        code = 422
-    ))
+            )
+        else:
+            responder = Responder.Send(
+                data = { "message": "username already taken" },
+                code = 400
+            )
+    else:
+        responder = Responder.Send(
+            data = { "message": "invalid credentials format" },
+            code = 422
+        )
+    response.status_code = responder["code"]
+    return (responder)
 
 @router.get("/profile")
-async def get_profile(x_token: Union[List[str], None] = Header(default=None)):
+async def get_profile(x_token: Union[List[str], None] = Header(default=None), response: Response = None):
     decrypted = None
 
     if (Headers.Check(x_token) == True):
@@ -63,22 +68,37 @@ async def get_profile(x_token: Union[List[str], None] = Header(default=None)):
             if (x_token[0] != None):
                 decrypted = Authentification.decrypt(x_token[0])
                 if (decrypted != None):
-                    return (Responder.Send(
+                    responder = Responder.Send(
                         data = { "message": json.loads(decrypted) },
                         code = 200
-                    ))
-            return (Responder.Send(
+                    )
+                else:
+                    responder = Responder.Send(
+                        data = { "message": "invalid token header" },
+                        code = 422
+                    )
+            else:
+                responder = Responder.Send(
+                    data = { "message": "invalid token header" },
+                    code = 422
+                )
+        else:
+            responder = Responder.Send(
                 data = { "message": "invalid token header" },
                 code = 422
-            ))
-    return (Responder.Send(
-        data = { "message": "missing token header" },
-        code = 400
-    ))
+            )
+    else:
+        responder = Responder.Send(
+            data = { "message": "missing token header" },
+            code = 400
+        )
+    response.status_code = responder["code"]
+    return (responder)
 
 @router.post("/login")
-async def post_login(credentials: dict):
+async def post_login(credentials: dict, response: Response = None):
     user = None
+    responder = None
 
     if (Validator.validate(["username", "password"], credentials) == True):
         user = Crud.get_user(credentials["username"])
@@ -88,22 +108,28 @@ async def post_login(credentials: dict):
                     "username": credentials["username"],
                     "password": credentials["password"]
                 })
-                return (Responder.Send(
+                responder = Responder.Send(
                     data = {
                         "message": "ok",
                         "token": token
                     },
                     code = 200
-                ))
-            return (Responder.Send(
-                data = { "message": "password not matching" },
+                )
+            else:
+                responder = Responder.Send(
+                    data = { "message": "password not matching" },
+                    code = 400
+                )
+        else:
+            responder = Responder.Send(
+                data = { "message": "user not found" },
                 code = 400
-            ))
-        return (Responder.Send(
-            data = { "message": "user not found" },
-            code = 400
-        ))
-    return (Responder.Send(
-        data = { "message": "invalid credentials format" },
-        code = 422
-    ))
+            )
+    else:
+        responder = Responder.Send(
+            data = { "message": "invalid credentials format" },
+            code = 422
+        )
+
+    response.status_code = responder["code"]
+    return (responder)
