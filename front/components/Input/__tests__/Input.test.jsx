@@ -8,7 +8,7 @@ import React from "react";
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import Input from "../Input";
+import { Input } from "../Input";
 import { act } from "@testing-library/react";
 
 const LABEL_VALUE = "simple_input";

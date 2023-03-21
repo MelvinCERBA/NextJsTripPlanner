@@ -32,4 +32,4 @@ Input.propTypes = {
   props: PropTypes.object,
 };
 
-export default Input;
+export { Input };
