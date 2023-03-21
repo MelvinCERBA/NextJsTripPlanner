@@ -2,3 +2,5 @@
 
 export * from "./joinClasses";
 export * from "./breakpoints";
+export * from "./formatCurrency";
+export * from "./MyErrorBoundary";

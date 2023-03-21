@@ -7,3 +7,7 @@ export * from "./Input";
 export * from "./TripSearchBar";
 export * from "./Divider";
 export * from "./GeoMap";
+export * from "./NavBar";
+export * from "./SideBar";
+export * from "./Activity";
+export * from "./Activity";
