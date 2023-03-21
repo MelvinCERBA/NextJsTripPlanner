@@ -1,4 +1,3 @@
-import { joinClasses, BREAKPOINTS } from "./utils";
-import { useResponsive } from "./hooks";
+import { joinClasses, MyErrorBoundary} from "./utils";
 
-export { joinClasses, BREAKPOINTS, useResponsive }
+export { joinClasses, MyErrorBoundary}

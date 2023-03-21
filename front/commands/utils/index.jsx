@@ -1,3 +1,4 @@
 import { joinClasses } from "./joinClasses";
-import { BREAKPOINTS } from "./breakpoints";
-export { joinClasses, BREAKPOINTS };
+import { formatCurrency } from "./formatCurrency";
+import {MyErrorBoundary} from "./MyErrorBoundary";
+export { joinClasses, formatCurrency };
