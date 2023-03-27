@@ -29,13 +29,14 @@ router = APIRouter()
 Responder = Responder()
 
 @router.get("/location")
-async def get_location(x_token: Union[List[str], None] = Header(default=None), location: str = None):
+async def get_location(x_token: Union[List[str], None] = Header(default=None), location: str = None, response: Response = None):
     credentials = None
+    responder = None
+    decrypted = None
     map_result = requests.get("https://api.mapbox.com/geocoding/v5/mapbox.places/{}.json?country=fr&language=fr&access_token={}".format(
         location,
         os.getenv("access_token")
     ))
-    decrypted = None
 
     if (Headers.Check(x_token) == True):
         decrypted = Authentification.decrypt(x_token[0])
@@ -43,16 +44,19 @@ async def get_location(x_token: Union[List[str], None] = Header(default=None), l
             credentials = json.loads(decrypted)
             result = Crud.add_history(credentials["user"], location)
 
-    return (Responder.Send(
+    responder = Responder.Send(
         data = {
             "message": "ok",
             "result": map_result.json()
         },
         code = 200
-    ))
+    )
+    response.status_code = responder["code"]
+
+    return (responder)
 
 @router.get("/event")
-async def get_event(x_token: Union[List[str], None] = Header(default=None), longitude: float = 0.0, latitude: float = 0.0, radius: int = 50, hotels: bool = False, shopping: bool = False, airports: bool = False):
+async def get_event(x_token: Union[List[str], None] = Header(default=None), longitude: float = 0.0, latitude: float = 0.0, radius: int = 50, hotels: bool = False, shopping: bool = False, airports: bool = False, response: Response = None):
     credentials = None
     result = {}
     selected = False
@@ -75,49 +79,59 @@ async def get_event(x_token: Union[List[str], None] = Header(default=None), long
                 result[name] = []
                 print(f"{name}: {ex}")
 
-    return (Responder.Send(
+    responder = Responder.Send(
         data = {
             "message": "ok",
             "result": result
         },
         code = 200
-    ))
+    )
+    response.status_code = responder["code"]
+
+    return (responder)
 
 @router.post("/save")
-async def post_save(x_token: Union[List[str], None] = Header(default=None), roadtrip: dict = {}):
+async def post_save(x_token: Union[List[str], None] = Header(default=None), roadtrip: dict = {}, response: Response = None):
     credentials = None
     result = {}
     decrypted = None
+    responder = None
 
     if (Headers.Check(x_token) == True):
         decrypted = Authentification.decrypt(x_token[0])
         if (decrypted != None):
             credentials = json.loads(decrypted)
             result = Crud.add_save(credentials["user"], roadtrip)
-            return (Responder.Send(
+            responder = Responder.Send(
                 data = {
                     "message": "ok",
                     "result": "roadtrip saved"
                 },
                 code = 200
-            ))
-        return (Responder.Send(
+            )
+        else:
+            responder = Responder.Send(
+                data = {
+                    "message": "invalid token"
+                },
+                code = 400
+            )
+    else:
+        responder = Responder.Send(
             data = {
-                "message": "invalid token"
+                "message": "missing token header"
             },
             code = 400
-        ))
-    return (Responder.Send(
-        data = {
-            "message": "missing token header"
-        },
-        code = 400
-    ))
+        )
+    response.status_code = responder["code"]
+
+    return (responder)
 
 @router.get("/roadtrips")
-async def get_roadtrips(x_token: Union[List[str], None] = Header(default=None), city: str = None):
+async def get_roadtrips(x_token: Union[List[str], None] = Header(default=None), city: str = None, response: Response = None):
     decrypted = None
     credentials = None
+    responder = None
     result = []
 
     if (Headers.Check(x_token) == True):
@@ -125,24 +139,28 @@ async def get_roadtrips(x_token: Union[List[str], None] = Header(default=None), 
         if (decrypted != None):
             credentials = json.loads(decrypted)
             result = Crud.get_roadtrips(credentials["user"], city)
-
-            return (Responder.Send(
+            responder = Responder.Send(
                 data = {
                     "message": "ok",
                     "result": result
                 },
                 code = 200
-            ))
-        return (Responder.Send(
+            )
+        else:
+            responder = Responder.Send(
+                data = {
+                    "message": "invalid token"
+                },
+                code = 400
+            )
+    else:
+        responder = Responder.Send(
             data = {
-                "message": "invalid token"
+                "message": "missing token header"
             },
             code = 400
-        ))
+        )
 
-    return (Responder.Send(
-        data = {
-            "message": "missing token header"
-        },
-        code = 400
-    ))
+    response.status_code = responder["code"]
+
+    return (responder)
