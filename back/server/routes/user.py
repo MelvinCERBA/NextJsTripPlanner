@@ -46,16 +46,18 @@ async def post_regiser(credentials: dict, response: Response = None):
                 },
                 code = 200
             )
-        else:
-            responder = Responder.Send(
-                data = { "message": "username already taken" },
-                code = 400
-            )
-    else:
+            response.status_code = responder["code"]
+            return (responder)
         responder = Responder.Send(
-            data = { "message": "invalid credentials format" },
-            code = 422
+            data = { "message": "username already taken" },
+            code = 400
         )
+        response.status_code = responder["code"]
+        return (responder)
+    responder = Responder.Send(
+        data = { "message": "invalid credentials format" },
+        code = 422
+    )
     response.status_code = responder["code"]
     return (responder)
 
@@ -72,26 +74,25 @@ async def get_profile(x_token: Union[List[str], None] = Header(default=None), re
                         data = { "message": json.loads(decrypted) },
                         code = 200
                     )
-                else:
-                    responder = Responder.Send(
-                        data = { "message": "invalid token header" },
-                        code = 422
-                    )
-            else:
+                    response.status_code = responder["code"]
+                    return (responder)
+
                 responder = Responder.Send(
                     data = { "message": "invalid token header" },
                     code = 422
                 )
-        else:
-            responder = Responder.Send(
-                data = { "message": "invalid token header" },
-                code = 422
-            )
-    else:
+                response.status_code = responder["code"]
+                return (responder)
         responder = Responder.Send(
-            data = { "message": "missing token header" },
-            code = 400
+            data = { "message": "invalid token header" },
+            code = 422
         )
+        response.status_code = responder["code"]
+        return (responder)
+    responder = Responder.Send(
+        data = { "message": "missing token header" },
+        code = 400
+    )
     response.status_code = responder["code"]
     return (responder)
 
@@ -115,21 +116,23 @@ async def post_login(credentials: dict, response: Response = None):
                     },
                     code = 200
                 )
-            else:
-                responder = Responder.Send(
-                    data = { "message": "password not matching" },
-                    code = 400
-                )
-        else:
+                response.status_code = responder["code"]
+                return (responder)
             responder = Responder.Send(
-                data = { "message": "user not found" },
+                data = { "message": "password not matching" },
                 code = 400
             )
-    else:
+            response.status_code = responder["code"]
+            return (responder)
         responder = Responder.Send(
-            data = { "message": "invalid credentials format" },
-            code = 422
+            data = { "message": "user not found" },
+            code = 400
         )
-
+        response.status_code = responder["code"]
+        return (responder)
+    responder = Responder.Send(
+        data = { "message": "invalid credentials format" },
+        code = 422
+    )
     response.status_code = responder["code"]
     return (responder)
