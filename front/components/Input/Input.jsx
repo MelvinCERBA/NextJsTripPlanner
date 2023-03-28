@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { joinClasses } from '../../commands';
 
-export const Input = ({ type = "search", placeholder = "Entrez ici", name = "searchbar", label = "Search", className = '', props }) => {
-  const [value, setValue] = useState("");
+export const Input = ({ value, setValue, type = "search",placeholder = "Entrez ici", name = "searchbar", label = "Search", className = '', props }) => {
+  // const [value, setValue] = useState("");
   const CLASS_NAME = "text-orange-main border-b border-black hover:border-orange-main focus:border-orange-main hover:border-b-2 focus:border-b-2 transition-all w-full";
   
   function onInputChange(event) {

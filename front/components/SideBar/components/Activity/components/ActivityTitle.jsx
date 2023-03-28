@@ -1,7 +1,7 @@
 import {BiLinkExternal} from "react-icons/Bi";
 import { IconContext } from "react-icons";
-import { joinClasses } from "../../../commands";
-import { formatCurrency } from "../../../commands/utils";
+import { joinClasses } from '../../../../../commands';
+import { formatCurrency } from "../../../../../commands/utils";
 
 
 export const ActivityTitle = ({label, adress, price, className = ''}) => {
