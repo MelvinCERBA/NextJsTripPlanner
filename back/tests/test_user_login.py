@@ -1,9 +1,11 @@
-from fastapi.testclient import TestClient
-
-from server.app import app
-
+import os
 import random
 import requests
+
+os.environ["private_key"] = "00000000000000000000000000000000"
+
+from fastapi.testclient import TestClient
+from server.app import app
 
 client = TestClient(app)
 
@@ -54,7 +56,7 @@ def test_user_already_registered():
         }
     )
 
-    assert response.status_code == 200
+    assert response.status_code == 400
     json_data = response.json()
 
     assert json_data["data"]["message"] == "username already taken"

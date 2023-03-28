@@ -1,4 +1,8 @@
+import os
+
 from tools.responder import Responder
+
+os.environ["private_key"] = "00000000000000000000000000000000"
 
 #test for responder.py
 def test_responder():

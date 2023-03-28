@@ -1,3 +1,4 @@
-import { joinClasses, MyErrorBoundary} from "./utils";
+/* istanbul ignore file */
 
-export { joinClasses, MyErrorBoundary}
+export * from "./utils";
+export * from "./hooks/";

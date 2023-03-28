@@ -1,5 +1,9 @@
+import os
+
 from tools.security import Authentification
 from tools.formatter import Formatter
+
+os.environ["private_key"] = "00000000000000000000000000000000"
 
 #test for Formatter.py
 def test_formater():
@@ -22,4 +26,5 @@ def test_formater():
     assert "poi" not in response.keys()
     assert response["history"] == []
     assert response["username"] == username
+    assert authentification.compare(password, response["password"]) == True
     assert password not in response

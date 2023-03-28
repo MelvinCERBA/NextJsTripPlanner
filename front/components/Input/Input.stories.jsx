@@ -1,15 +1,16 @@
-import { Input } from './Input';
+import React from "react";
+import { Input } from "./Input";
 
 export default {
-  title: 'Components/Input',
+  title: "Components/Input",
   component: Input,
   argTypes: {
-    type: { control: 'radio', options: ['search', 'text', 'number'] },
+    type: { control: "radio", options: ["search", "text", "number"] },
     name: {
       table: {
-        disable: true
-      }
-    }
+        disable: true,
+      },
+    },
   },
   args: {
     name: "test-name",
@@ -20,21 +21,21 @@ const Template = (args) => <Input {...args} />;
 
 export const Search = Template.bind({});
 Search.args = {
-  type: 'search',
+  type: "search",
   placeholder: "Entrez ici",
   label: "Label",
 };
 
 export const Text = Template.bind({});
 Text.args = {
-  type: 'text',
+  type: "text",
   placeholder: "Entrez ici",
   label: "Label",
 };
 
 export const Number = Template.bind({});
 Number.args = {
-  type: 'number',
+  type: "number",
   placeholder: "Entrez ici",
   label: "Label",
 };

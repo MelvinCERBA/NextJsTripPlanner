@@ -1,2 +1,3 @@
-import { useResponsive } from "./useResponsive";
-export { useResponsive };
+/* istanbul ignore file */
+
+export * from "./useAuth";
