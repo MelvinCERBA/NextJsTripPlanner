@@ -1,15 +1,13 @@
-import { Layout } from '../components';
-import { Button } from '../components';
+import React from "react";
+import { Layout, Button } from "../components";
 
 export default function Home() {
   return (
     <>
       <Layout title="Trip Tise" description="Welcome !">
-        <main>
-          Coucou
-        </main>
+        <main>Coucou</main>
         <Button label="Haha" />
       </Layout>
     </>
-  )
+  );
 }
