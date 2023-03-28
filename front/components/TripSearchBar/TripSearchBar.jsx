@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Input, Divider } from "..";
 import { BsSearch } from "react-icons/bs";
 import { MdFilterAlt } from "react-icons/md";
