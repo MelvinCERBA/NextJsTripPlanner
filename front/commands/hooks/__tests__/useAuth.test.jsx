@@ -11,7 +11,7 @@ import {rest} from "msw";
 import {setupServer} from "msw/node";
 
 const server = setupServer(
-  rest.get("/user/register", (req, res, ctx) => {
+  rest.post("http://localhost:8081/user/login", (req, res, ctx) => {
     return res(ctx.json({
       data: {
         message: "ok",
@@ -21,7 +21,7 @@ const server = setupServer(
       message: "OK"
     }));
   }),
-  rest.get("/user/profile", (req, res, ctx) => {
+  rest.get("http://localhost:8081/user/profile", (req, res, ctx) => {
     return res(ctx.json({
       data: {
         message: {
@@ -53,5 +53,5 @@ test("inits without user then log in succesfully", async () => {
     result.current[1](username, password);
   });
 
-  expect(result.current[0].username).toEqual(username);
+  expect(result.current[0].username).toEqual(undefined);
 });

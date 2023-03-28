@@ -1,23 +1,79 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { joinClasses } from "../../commands";
 
-function Input({ type = "search", placeholder = "Entrez ici", name = "searchbar", label = "Search", className = "", props }) {
-  const [value, setValue] = useState("");
-  const CLASS_NAME = "text-orange-main border-b border-black hover:border-orange-main focus:border-orange-main hover:border-b-2 focus:border-b-2 transition-all w-full";
-  
-  function onInputChange(event) {
-    setValue(event.target.value);
-  }
-
+function Input({
+  type = "search",
+  placeholder = "Entrez ici",
+  name = "searchbar",
+  label = "Search",
+  className = "",
+  onChange = () => {},
+  value = "",
+  selectOptions = [<></>],
+  props,
+}) {
+  const CLASS_NAME =
+    "text-orange-main border-b border-black hover:border-orange-main focus:border-orange-main hover:border-b-2 focus:border-b-2 transition-all w-full";
   const INPUT_DICT = {
-    search: <input onChange={onInputChange} value={value} id={name} name={name} placeholder={placeholder} className={CLASS_NAME} type="search" {...props} />,
-    text: <input onChange={onInputChange} value={value} id={name} name={name} placeholder={placeholder} className={CLASS_NAME} type="text" {...props} />,
-    number: <input onChange={onInputChange} value={value} id={name} name={name} placeholder={placeholder} className={CLASS_NAME} type="number" {...props} />,
+    select: (
+      <select
+        onChange={onChange}
+        value={value}
+        id={name}
+        name={name}
+        placeholder={placeholder}
+        className={joinClasses([CLASS_NAME, "bg-white"])}
+        type="select"
+        {...props}
+      >
+        {selectOptions}
+      </select>
+    ),
+    search: (
+      <input
+        onChange={onChange}
+        value={value}
+        id={name}
+        name={name}
+        placeholder={placeholder}
+        className={CLASS_NAME}
+        type="text"
+      />
+    ),
+    text: (
+      <input
+        onChange={onChange}
+        value={value}
+        id={name}
+        name={name}
+        placeholder={placeholder}
+        className={CLASS_NAME}
+        type="text"
+        {...props}
+      />
+    ),
+    number: (
+      <input
+        onChange={onChange}
+        value={value}
+        id={name}
+        name={name}
+        placeholder={placeholder}
+        className={CLASS_NAME}
+        type="number"
+        {...props}
+      />
+    ),
   };
   return (
     <div className={joinClasses(["flex flex-col w-auto", className])}>
-      <label className="text-orange-main focus:text-orange-secondary" htmlFor={name}>{label}</label>
+      <label
+        className="text-orange-main focus:text-orange-secondary"
+        htmlFor={name}
+      >
+        {label}
+      </label>
       {INPUT_DICT[type]}
     </div>
   );
@@ -30,6 +86,9 @@ Input.propTypes = {
   label: PropTypes.string,
   className: PropTypes.string,
   props: PropTypes.object,
+  onChange: PropTypes.func,
+  value: PropTypes.string,
+  selectOptions: PropTypes.array,
 };
 
 export { Input };
