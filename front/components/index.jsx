@@ -10,4 +10,5 @@ export * from "./GeoMap";
 export * from "./NavBar";
 export * from "./SideBar";
 export * from "./Activity";
-export * from "./Activity";
+export * from "./Forms";
+export * from "./Map";

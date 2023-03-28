@@ -1,7 +1,8 @@
 import { ActivityTitle, AddActivityButton } from '../components';
-import { Divider } from '../..';
+import { Divider } from '../../../..';
+import defaultImg from "/public/default_activity_image.jpg";
 import Image from 'next/image';
-import { joinClasses } from '../../../commands';
+import { joinClasses } from '../../../../../commands';
 
 
 export const ActivityLg = ({ label, adress, price, desc, link}) => {
@@ -13,7 +14,7 @@ export const ActivityLg = ({ label, adress, price, desc, link}) => {
   return (
     <div id="activity" className="flex place-items-center mx-5 my-5 gap-2 max-h-[150px]">
       <div id="img_container" className="aspect-square h-full ">
-        <Image src={"/public/default_activity_image.jpg"} style={{objectFit: 'cover'}} width={50} height={50} className="aspect-square rounded-3xl" alt='Activity Image'></Image>
+        <Image src={defaultImg} style={{objectFit: 'cover'}} width={150} height={150} className="aspect-square rounded-3xl" alt='Activity Image'></Image>
       </div>
       <Divider type="vertical" className=' h-4/5 '></Divider>
       <div id="info" className="flex flex-col justify-between h-full gap-2 ">
