@@ -8,5 +8,5 @@ COPY . /code
 
 
 #RUN ./launch_tests
-
+RUN source ./code/.env
 CMD ["uvicorn", "server.app:app", "--host", "0.0.0.0", "--port", "8000"]

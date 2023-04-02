@@ -16,6 +16,7 @@ class Authentification:
         self.expired = 3600 * 60 * 1000
         self.Responder = Responder()
         self.key = base64.b64encode(str(os.getenv("private_key")).encode('utf-8'))
+        print(f"private key env. var. : {self.key}")
         self.fernet = Fernet(self.key)
 
     def __validate_date__(self, start, end):

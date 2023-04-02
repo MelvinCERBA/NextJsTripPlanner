@@ -3,11 +3,12 @@ import React, { useState, useRef } from "react";
 import { TripSearchBar } from "..";
 import mapboxgl from "!mapbox-gl";
 import { useEffect } from "react";
+import { joinClasses } from "@/commands";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam9uYXRoYW5lbW1hbnVlbGpvc2UiLCJhIjoiY2xlY3M5ZG5mMDAwODNvcDl0YTd6dDJ4MyJ9.41z7trqtNa8IpWd_J2Q6tw";
 
-export function GeoMap() {
+export function GeoMap({ className }) {
   const [results, setResults] = useState([]);
   const [search, setSearch] = useState({ type: "", city: "", radius: "" });
   const mapContainer = useRef(null);
@@ -83,17 +84,27 @@ export function GeoMap() {
   };
 
   return (
-    <>
-      <TripSearchBar
+    <div className={joinClasses([className])}>
+      <div className=" flex content-center w-full" name="searchbar-container">
+        <TripSearchBar
+          cityResults={results}
+          value={search}
+          onChange={searchValuesSetters}
+          displayResults={displayResults}
+          className="w-full mx-5 bg-white"
+        />
+      </div>
+      {/* <TripSearchBar
         cityResults={results}
         value={search}
         onChange={searchValuesSetters}
         displayResults={displayResults}
-      />
+        className="box-border absolute top-4 w-[75%] bg-white mx-5"
+      /> */}
       <div
         ref={mapContainer}
         className="w-full md:h-[80vh] sm:h-[60vh] h-[40vh]"
       />
-    </>
+    </div>
   );
 }

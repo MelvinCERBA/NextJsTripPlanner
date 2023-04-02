@@ -1,12 +1,11 @@
-import { Map } from './Map';
+import { Map } from "./Map";
 
 export default {
-  title: 'Components/Map',
+  title: "Components/Map",
   component: Map,
 };
 
 const Template = (args) => <Map {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {
-};
+Primary.args = {};

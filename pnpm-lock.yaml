@@ -1,0 +1,17 @@
+lockfileVersion: 5.4
+
+specifiers:
+  reactjs-popup: ^2.0.5
+
+dependencies:
+  reactjs-popup: 2.0.5
+
+packages:
+
+  /reactjs-popup/2.0.5:
+    resolution: {integrity: sha512-b5hv9a6aGsHEHXFAgPO5s1Jw1eSkopueyUVxQewGdLgqk2eW0IVXZrPRpHR629YcgIpC2oxtX8OOZ8a7bQJbxA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dev: false

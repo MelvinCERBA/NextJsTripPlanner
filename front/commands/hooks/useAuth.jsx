@@ -15,10 +15,9 @@ export const useAuth = () => {
     try {
       const { data } = await axios.get("http://localhost:8081/user/profile", {
         headers: {
-          "X-Token": cookie_userToken
-        }
+          "X-Token": cookie_userToken,
+        },
       });
-
     } catch (error) {
       setError(error);
     }
@@ -26,14 +25,17 @@ export const useAuth = () => {
 
   async function connectWithUsernameAndPassword() {
     try {
-      const { data } = await axios.post(`http://localhost:8081/user/${register ? "register" : "login"}`, { username, password });
+      const { data } = await axios.post(
+        `http://localhost:8081/user/${register ? "register" : "login"}`,
+        { username, password }
+      );
       const token = data.data.token;
 
       try {
         const { data } = await axios.get("http://localhost:8081/user/profile", {
           headers: {
-            "X-Token": token
-          }
+            "X-Token": token,
+          },
         });
         const u_name = data.data.message.user;
 
@@ -50,7 +52,6 @@ export const useAuth = () => {
             Secure: true,
           });
         }
-
       } catch (error) {
         setError(error);
       }
@@ -62,13 +63,16 @@ export const useAuth = () => {
   useEffect(() => {
     if (cookie_userToken) {
       connectWithToken();
-    }
-    else {
+    } else {
       connectWithUsernameAndPassword();
     }
   }, [username, password, register]);
 
-  function userDataHandler(u_name = "", p_word = "", params = { register: false }) {
+  function userDataHandler(
+    u_name = "",
+    p_word = "",
+    params = { register: false }
+  ) {
     setRegister(params.register);
     setPassword(p_word);
     setUsername(u_name);
@@ -78,5 +82,10 @@ export const useAuth = () => {
     setUserData({});
   }
 
-  return [{ username: cookie_userName, token: cookie_userToken }, userDataHandler, disconnect, error];
+  return [
+    { username: cookie_userName, token: cookie_userToken },
+    userDataHandler,
+    disconnect,
+    error,
+  ];
 };

@@ -44,7 +44,6 @@ function Input({
     text: (
       <input
         onChange={onChange}
-        value={value}
         id={name}
         name={name}
         placeholder={placeholder}
@@ -53,10 +52,20 @@ function Input({
         {...props}
       />
     ),
+    password: (
+      <input
+        onChange={onChange}
+        id={name}
+        name={name}
+        placeholder={placeholder}
+        className={CLASS_NAME}
+        type="password"
+        {...props}
+      />
+    ),
     number: (
       <input
         onChange={onChange}
-        value={value}
         id={name}
         name={name}
         placeholder={placeholder}

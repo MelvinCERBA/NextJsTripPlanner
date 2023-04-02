@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montaga&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montaga&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  input:focus{
+  input:focus {
     @apply outline-none;
   }
   * {
@@ -45,25 +45,25 @@
   .filter-grayscale {
     filter: grayscale(100%);
   }
-  /* Multiline text ellipsis  */ 
+  /* Multiline text ellipsis  */
   .block-with-text {
     overflow: hidden;
-    position: relative; 
+    position: relative;
     line-height: 1.2em;
-    max-height: 3.6em; 
-    text-align: justify;  
+    max-height: 3.6em;
+    text-align: justify;
     margin-right: -1em;
     padding-right: 1em;
   }
   /* create the ... */
   .block-with-text:before {
-    content: '...';
+    content: "...";
     position: absolute;
     right: 0;
     bottom: 0;
   }
   .block-with-text:after {
-    content: '';
+    content: "";
     position: absolute;
     right: 0;
     width: 1em;

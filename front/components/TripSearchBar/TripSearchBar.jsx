@@ -2,6 +2,7 @@ import React from "react";
 import { Input, Divider } from "..";
 import { BsSearch } from "react-icons/bs";
 import { MdFilterAlt } from "react-icons/md";
+import { joinClasses } from "@/commands";
 
 export const TripSearchBar = ({
   onChange = {
@@ -19,10 +20,16 @@ export const TripSearchBar = ({
   value = { type: "", city: "", radius: "" },
   cityResults = [],
   displayResults = false,
+  className,
 }) => {
   return (
     <>
-      <div className="hidden sm:block rounded-xl shadow-2xl px-8 py-5">
+      <div
+        className={joinClasses([
+          className,
+          "hidden sm:block rounded-xl shadow-2xl px-8 py-5",
+        ])}
+      >
         <div className="flex flex-row justify-center flex-wrap gap-4">
           <Input
             value={value.type}

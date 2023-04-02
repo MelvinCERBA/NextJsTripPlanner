@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 class MyErrorBoundary extends React.Component {
   state = {
-    errorMessage: '',
+    errorMessage: "",
   };
 
   static getDerivedStateFromError(error) {
@@ -24,4 +24,4 @@ class MyErrorBoundary extends React.Component {
   }
 }
 
-export {MyErrorBoundary};
+export { MyErrorBoundary };

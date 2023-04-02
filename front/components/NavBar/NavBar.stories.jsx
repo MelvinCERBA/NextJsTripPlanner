@@ -1,12 +1,11 @@
-import { NavBar } from './NavBar';
+import { NavBar } from "./NavBar";
 
 export default {
-  title: 'Components/NavBar',
+  title: "Components/NavBar",
   component: NavBar,
 };
 
 const Template = (args) => <NavBar {...args} />;
 
 export const Primary = Template.bind({});
-Primary.args = {
-};
+Primary.args = {};
