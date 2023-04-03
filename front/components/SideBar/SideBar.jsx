@@ -1,19 +1,25 @@
 // import { Activity } from "./components";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { joinClasses } from "../../commands";
 import { GiWorld } from "react-icons/gi";
 import { TimeLine } from "./components";
 import { SearchResults } from "./components";
-import { useState } from "react";
+import { DisplayContext } from "@/contexts";
 
 export function SideBar({ displayMap, setDisplayMap, className = "" }) {
   // eslint-disable-next-line no-unused-vars
-  const [displaySearchResults, setDisplaySearchResults] = useState(false);
-
+  const { DisplaySearchResults, setDisplaySearchResults } =
+    useContext(DisplayContext);
+  console.log(`SIDEBAR: DisplaySearchResults = ${DisplaySearchResults}`);
+  useEffect(() => {
+    console.log(
+      `SIDEBAR: DisplaySearchResults changed : ${DisplaySearchResults}`
+    );
+  }, [DisplaySearchResults]);
   return (
     <>
       <div className={joinClasses(["flex flex-col h-full", className])}>
-        {displaySearchResults ? <SearchResults /> : <TimeLine />}
+        {DisplaySearchResults ? <SearchResults /> : <TimeLine />}
       </div>
       <div
         onClick={() => setDisplayMap(!displayMap)}

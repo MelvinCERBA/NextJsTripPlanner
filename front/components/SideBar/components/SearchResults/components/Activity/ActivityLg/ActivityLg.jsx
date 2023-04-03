@@ -1,6 +1,6 @@
 import React from "react";
 import { ActivityTitle, AddActivityButton } from "../components";
-import { Divider } from "../../../..";
+import { Divider } from "@/components";
 import defaultImg from "/public/default_activity_image.jpg";
 import Image from "next/image";
 import { joinClasses } from "@/commands";

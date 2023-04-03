@@ -1,7 +1,7 @@
 import React from "react";
 import { BiLinkExternal } from "react-icons/Bi";
-import { joinClasses } from "../../../../../commands";
-import { formatCurrency } from "../../../../../commands/utils";
+import { joinClasses } from "@/commands";
+import { formatCurrency } from "@/commands/utils";
 
 export const ActivityTitle = ({
   label,
@@ -25,19 +25,25 @@ export const ActivityTitle = ({
     >
       <div id="place" className="flex flex-col align-self-start ">
         <span className="font-bold text-lg truncate w-auto">
-          {price > 0 ? label + " - " + formatCurrency(price) : label}
+          {price ? label + " - " + formatCurrency(price) : label}
         </span>
-        <span className=" text-gray-700 text-md truncate">{adress}</span>
+        <span className=" text-gray-700 text-md truncate">
+          {adress ? adress : ""}
+        </span>
       </div>
-      <div
-        onClick={(e) => handleLinkClick(e)}
-        className="flex align-center justify-self-end"
-      >
-        <BiLinkExternal
-          className="justify-self-end h-full aspect-square"
-          size={30}
-        ></BiLinkExternal>
-      </div>
+      {link ? (
+        <div
+          onClick={(e) => handleLinkClick(e)}
+          className="flex align-center justify-self-end"
+        >
+          <BiLinkExternal
+            className="justify-self-end h-full aspect-square"
+            size={30}
+          ></BiLinkExternal>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
