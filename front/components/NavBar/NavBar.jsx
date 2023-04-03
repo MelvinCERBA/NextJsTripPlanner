@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Button } from "../Button";
 import logo from "../../public/logo-no-background.png";
 import Image from "next/image";
 import { FiMenu } from "react-icons/fi";
 import { useState } from "react";
+import { DisplayContext } from "@/contexts";
 
-export function NavBar({ setDisplayForm }) {
+export function NavBar() {
+  const { DisplayForm, setDisplayForm } = useContext(DisplayContext);
+
+  useEffect(() => {
+    console.log(`NAVBAR: displayForm changed : ${DisplayForm}`);
+  }, [DisplayForm]);
+
   function handleClickLogIn() {
     setDisplayForm("log");
     console.log("login fucntion called");

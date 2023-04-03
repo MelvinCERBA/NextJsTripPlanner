@@ -10,6 +10,7 @@ export function SearchResultsContextWrapper({ children }) {
       name: "activité 2",
       date: new Date().toLocaleDateString("fr"),
       desc: "bsqfhsdjfousdhq qdsfhqisofhilqus sduihfqsidfjoisqdh",
+      link: "https://google.fr",
     },
     {
       name: "activité 3",

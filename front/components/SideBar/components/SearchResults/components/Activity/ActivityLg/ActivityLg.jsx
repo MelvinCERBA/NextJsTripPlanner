@@ -6,12 +6,13 @@ import Image from "next/image";
 import { joinClasses } from "@/commands";
 
 export const ActivityLg = ({
-  label = "Nom de l'activité",
-  adress = "Adresse de l'activité",
+  label,
+  adress = "Adresse inconnue.",
   price = 0,
-  desc = "Description de l'activité",
-  link = "/",
+  desc = "Pas de description pour l'activité",
+  link,
   className,
+  setSelectedActivity,
 }) => {
   return (
     <div
@@ -47,7 +48,7 @@ export const ActivityLg = ({
         <p id="desc" className="block-with-text">
           {desc}
         </p>
-        <AddActivityButton />
+        <AddActivityButton setSelectedActivity={setSelectedActivity}/>
       </div>
     </div>
   );

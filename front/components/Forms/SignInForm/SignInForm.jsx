@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { joinClasses } from "../../../commands/utils";
 import { Input } from "@/components";
 import { Button } from "@/components";
 import { useState } from "react";
+import { DisplayContext } from "@/contexts";
 
-export function SignInForm({ setDisplayForm, className = "" }) {
+export function SignInForm({ className = "" }) {
+  const { setDisplayForm } = useContext(DisplayContext);
+
   const [email, setEmail] = useState("");
   const [mdp, setMdp] = useState("");
   // eslint-disable-next-line no-unused-vars

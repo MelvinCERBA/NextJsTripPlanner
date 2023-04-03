@@ -5,22 +5,14 @@ import { RxCross1 } from "react-icons/rx";
 
 export const ActivityRecap = ({
   label,
-  adress,
+  adress = "Adresse inconnue",
   price,
   desc,
   link,
   className,
 }) => {
-  if (!label | !adress | !price | !desc | !link) {
-    throw new Error("Missing parameter.");
-  } else if (
-    (typeof label != "string") |
-    (typeof adress != "string") |
-    (typeof desc != "string") |
-    (typeof link != "string") |
-    (typeof price != "number")
-  ) {
-    throw new Error("Incorrect parameter type.");
+  if (!label) {
+    throw new Error("ActivityRecap requires at least a label.");
   }
   return (
     <div className="flex">

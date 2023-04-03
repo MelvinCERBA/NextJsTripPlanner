@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { joinClasses } from "../../../commands/utils";
 import { Input } from "@/components";
 import { Button } from "@/components";
 import { useState } from "react";
+import { DisplayContext } from "@/contexts";
 
-export function LogInForm({ setDisplayForm, className = "" }) {
+export function LogInForm({ className = "" }) {
+  const { setDisplayForm } = useContext(DisplayContext);
   const [email, setEmail] = useState("");
   const [mdp, setMdp] = useState("");
 

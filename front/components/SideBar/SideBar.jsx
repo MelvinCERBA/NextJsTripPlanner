@@ -11,11 +11,13 @@ export function SideBar({ displayMap, setDisplayMap, className = "" }) {
   const { DisplaySearchResults, setDisplaySearchResults } =
     useContext(DisplayContext);
   console.log(`SIDEBAR: DisplaySearchResults = ${DisplaySearchResults}`);
+
   useEffect(() => {
     console.log(
       `SIDEBAR: DisplaySearchResults changed : ${DisplaySearchResults}`
     );
   }, [DisplaySearchResults]);
+
   return (
     <>
       <div className={joinClasses(["flex flex-col h-full", className])}>

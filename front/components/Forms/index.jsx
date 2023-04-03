@@ -1,3 +1,3 @@
-import { LogInForm } from "./LogInForm";
-import { SignInForm } from "./SignInForm";
-export { LogInForm, SignInForm };
+export * from "./LogInForm";
+export * from "./SignInForm";
+export * from "./AddActivityForm";

@@ -74,6 +74,17 @@ function Input({
         {...props}
       />
     ),
+    date: (
+      <input
+        onChange={onChange}
+        id={name}
+        name={name}
+        placeholder={placeholder}
+        className={CLASS_NAME}
+        type="date"
+        {...props}
+      />
+    ),
   };
   return (
     <div className={joinClasses(["flex flex-col w-auto", className])}>

@@ -12,6 +12,7 @@ export const ActivityMd = ({
   desc = "Description de l'activité",
   link = "/",
   className,
+  setSelectedActivity,
 }) => {
   return (
     <div
@@ -52,7 +53,7 @@ export const ActivityMd = ({
         <p id="desc" className="block-with-text">
           {desc}
         </p>
-        <AddActivityButton></AddActivityButton>
+        <AddActivityButton setSelectedActivity={setSelectedActivity} />
       </div>
     </div>
   );
