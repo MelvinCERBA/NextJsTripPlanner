@@ -42,6 +42,7 @@ export function NavBar() {
       >
         <div id="Logo" className="flex h-16 place-items-center">
           <Image
+            // eslint-disable-next-line no-undef
             src={require(".//../../public/logo-no-background.png")}
             height={50}
             width={50}
@@ -99,6 +100,7 @@ export function NavBar() {
         <div
           onClick={() => setOpenMenu(!menuOpen)}
           id="burgerMenu"
+          data-testid="burgerMenu"
           className="w-16 h-16 flex lg:hidden"
         >
           <FiMenu className="w-16 h-16 text-orange-main" />

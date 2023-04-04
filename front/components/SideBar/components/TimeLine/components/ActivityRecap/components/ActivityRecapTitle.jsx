@@ -1,5 +1,4 @@
 import React from "react";
-import { BiLinkExternal } from "react-icons/Bi";
 import { joinClasses } from "@/commands";
 import { formatCurrency } from "@/commands/utils";
 

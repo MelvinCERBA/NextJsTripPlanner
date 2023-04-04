@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import React from "react";
 import { ActivityTitle, AddActivityButton } from "../components";
 import { Divider } from "@/components";

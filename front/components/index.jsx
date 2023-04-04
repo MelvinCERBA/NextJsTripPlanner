@@ -10,4 +10,3 @@ export * from "./GeoMap";
 export * from "./NavBar";
 export * from "./SideBar";
 export * from "./Forms";
-export * from "./Map";

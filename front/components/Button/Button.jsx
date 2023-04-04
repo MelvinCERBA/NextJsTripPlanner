@@ -15,7 +15,7 @@ const Button = ({
   return (
     <button
       type="button"
-      className={alternate === true ? SECONDARY_CLASS : PRIMARY_CLASS}
+      className={alternate ? SECONDARY_CLASS : PRIMARY_CLASS}
       onClick={onClick}
       {...props}
     >

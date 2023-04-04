@@ -15,7 +15,7 @@ import { useState } from "react";
 const LABEL_VALUE = "simple_input";
 
 test("it click on basic button", async () => {
-  render(<Button alternate={false} onClick={() => setWord("hello")} />);
+  render(<Button onClick={() => setWord("hello")} />);
 
   act(() => {
     userEvent.click(screen.getByLabelText("Button"));
@@ -43,7 +43,7 @@ test("it change the input value", async () => {
 });
 
 test("test Input button @snapshots", async () => {
-  render(<Button label={LABEL_VALUE} />);
+  render(<Button alternate={null} label={LABEL_VALUE} />);
 
   expect(screen).toMatchSnapshot();
 });

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { BiLinkExternal } from "react-icons/Bi";
+import { BiLinkExternal } from "react-icons/bi";
 import { joinClasses } from "@/commands";
 import { formatCurrency } from "@/commands/utils";
 import { MapContext } from "@/contexts";

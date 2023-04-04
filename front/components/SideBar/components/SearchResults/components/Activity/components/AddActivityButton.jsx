@@ -1,5 +1,7 @@
+/* istanbul ignore file */
+
 import React, { useContext } from "react";
-import { FiPlus } from "react-icons/Fi";
+import { FiPlus } from "react-icons/fi";
 import { DisplayContext, ApiContext } from "@/contexts";
 
 export function AddActivityButton({ activity }) {

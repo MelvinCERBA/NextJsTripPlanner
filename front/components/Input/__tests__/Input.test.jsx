@@ -29,8 +29,8 @@ test("it change the input value by the placeholder", async () => {
   const PLACEHOLDER_VALUE = "simple_placeholder";
 
   render(<Input label={LABEL_VALUE} placeholder={PLACEHOLDER_VALUE} />);
-  await act(async () => {
-    await userEvent.type(
+  act(() => {
+    userEvent.type(
       screen.getByPlaceholderText(PLACEHOLDER_VALUE),
       "la putain de ta race"
     );

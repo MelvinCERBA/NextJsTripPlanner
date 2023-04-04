@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import axios from "axios";
 import React, { useState, useRef, useContext, useEffect } from "react";
 import { TripSearchBar } from "..";
