@@ -11,7 +11,7 @@ export const useApiTravel = () => {
   const [password, setPassword] = useState(undefined);
   const [register, setRegister] = useState(false);
 
-  async function connectWithToken() {
+  async function getTravel() {
     try {
       const { data } = await axios.get("http://localhost:8081/user/profile", {
         headers: {
