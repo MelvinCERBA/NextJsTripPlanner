@@ -5,87 +5,34 @@ import axios from "axios";
 
 export const useApiTravel = () => {
   const [error, setError] = useState("");
-  const [cookie_userName, setCookieUserName] = useCookie("TT_USER_NAME", "");
-  const [cookie_userToken, setCookieUserToken] = useCookie("TT_USER_TOKN", "");
-  const [username, setUsername] = useState(cookie_userName);
-  const [password, setPassword] = useState(undefined);
-  const [register, setRegister] = useState(false);
+  const [Travels, setTravels] = useState(false);
 
-  async function getTravel() {
+  async function getTravels() {
     try {
-      const { data } = await axios.get("http://localhost:8081/user/profile", {
+      const { data } = await axios.get("http://localhost:8081/trip/roadtrips", {
         headers: {
           "X-Token": cookie_userToken,
         },
+      });
+      setTravels(data.result);
+    } catch (error) {
+      setError(error);
+    }
+  }
+
+  async function saveTravel(travel) {
+    travel_json = JSON.stringify(travel);
+    try {
+      const { data } = await axios.post("http://localhost:8081/trip/save", {
+        headers: {
+          "X-Token": cookie_userToken,
+        },
+        data: travel_json,
       });
     } catch (error) {
       setError(error);
     }
   }
 
-  async function connectWithUsernameAndPassword() {
-    try {
-      const { data } = await axios.post(
-        `http://localhost:8081/user/${register ? "register" : "login"}`,
-        { username, password }
-      );
-      const token = data.data.token;
-
-      try {
-        const { data } = await axios.get("http://localhost:8081/user/profile", {
-          headers: {
-            "X-Token": token,
-          },
-        });
-        const u_name = data.data.message.user;
-
-        if (data.code === 200) {
-          setCookieUserName(u_name, {
-            days: 1,
-            SameSite: "Strict",
-            Secure: true,
-          });
-
-          setCookieUserToken(token, {
-            days: 1,
-            SameSite: "Strict",
-            Secure: true,
-          });
-        }
-      } catch (error) {
-        setError(error);
-      }
-    } catch (error) {
-      setError(error);
-    }
-  }
-
-  useEffect(() => {
-    if (cookie_userToken) {
-      connectWithToken();
-    } else {
-      connectWithUsernameAndPassword();
-    }
-  }, [username, password, register]);
-
-  function userDataHandler(
-    u_name = "",
-    p_word = "",
-    params = { register: false }
-  ) {
-    setRegister(params.register);
-    setPassword(p_word);
-    setUsername(u_name);
-  }
-
-  function disconnect() {
-    setUserData({});
-  }
-
-  return [
-    { username: cookie_userName, token: cookie_userToken },
-    userDataHandler,
-    disconnect,
-    error,
-  ];
+  return [Travels, getTravels];
 };

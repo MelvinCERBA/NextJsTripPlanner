@@ -11,7 +11,16 @@ export const useAuth = () => {
   const [password, setPassword] = useState(undefined);
   const [register, setRegister] = useState(false);
 
+  useEffect(() => {
+    console.log(`USEAUTH: error = ${JSON.stringify(error)}`);
+  }, [error]);
+  
+  useEffect(() => {
+    console.log(`USEAUTH: username = ${username}`);
+  }, [username]);
+  
   async function connectWithToken(token = "") {
+    console.log("USEAUTH: connecting with token");
     try {
       const { data } = await axios.get("http://localhost:8081/user/profile", {
         headers: {
@@ -26,6 +35,7 @@ export const useAuth = () => {
   }
 
   async function connectWithUsernameAndPassword() {
+    console.log("USEAUTH: connecting with isername and password");
     try {
       const { data } = await axios.post(
         `http://localhost:8081/user/${register ? "register" : "login"}`,
