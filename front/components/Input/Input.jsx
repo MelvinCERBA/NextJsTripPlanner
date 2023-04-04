@@ -18,6 +18,7 @@ function Input({
   const INPUT_DICT = {
     select: (
       <select
+        key="select-1"
         onChange={onChange}
         value={value}
         id={name}
@@ -32,6 +33,7 @@ function Input({
     ),
     search: (
       <input
+        key="search-2"
         onChange={onChange}
         value={value}
         id={name}
@@ -43,6 +45,7 @@ function Input({
     ),
     text: (
       <input
+        key="text-3"
         onChange={onChange}
         id={name}
         name={name}
@@ -54,6 +57,7 @@ function Input({
     ),
     password: (
       <input
+        key="password-4"
         onChange={onChange}
         id={name}
         name={name}
@@ -65,6 +69,7 @@ function Input({
     ),
     number: (
       <input
+        key="number-5"
         onChange={onChange}
         id={name}
         name={name}

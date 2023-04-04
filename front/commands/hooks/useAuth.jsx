@@ -11,15 +11,17 @@ export const useAuth = () => {
   const [password, setPassword] = useState(undefined);
   const [register, setRegister] = useState(false);
 
-  async function connectWithToken() {
+  async function connectWithToken(token = "") {
     try {
       const { data } = await axios.get("http://localhost:8081/user/profile", {
         headers: {
-          "X-Token": cookie_userToken,
+          "X-Token": token,
         },
       });
+      return data;
     } catch (error) {
       setError(error);
+      return error;
     }
   }
 
@@ -32,26 +34,20 @@ export const useAuth = () => {
       const token = data.data.token;
 
       try {
-        const { data } = await axios.get("http://localhost:8081/user/profile", {
-          headers: {
-            "X-Token": token,
-          },
-        });
+        const data = await connectWithToken(token);
         const u_name = data.data.message.user;
 
-        if (data.code === 200) {
-          setCookieUserName(u_name, {
-            days: 1,
-            SameSite: "Strict",
-            Secure: true,
-          });
+        setCookieUserName(u_name, {
+          days: 1,
+          SameSite: "Strict",
+          Secure: true,
+        });
 
-          setCookieUserToken(token, {
-            days: 1,
-            SameSite: "Strict",
-            Secure: true,
-          });
-        }
+        setCookieUserToken(token, {
+          days: 1,
+          SameSite: "Strict",
+          Secure: true,
+        });
       } catch (error) {
         setError(error);
       }
@@ -62,7 +58,7 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (cookie_userToken) {
-      connectWithToken();
+      connectWithToken(cookie_userToken);
     } else {
       connectWithUsernameAndPassword();
     }
