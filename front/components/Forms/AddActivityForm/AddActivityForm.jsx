@@ -3,21 +3,17 @@ import { joinClasses } from "../../../commands/utils";
 import { Input } from "@/components";
 import { Button } from "@/components";
 import { useState, useContext } from "react";
-import { DisplayContext, TravelContext } from "@/contexts";
+import { DisplayContext, ApiContext } from "@/contexts";
 
 export function AddActivityForm({ className = "" }) {
   const [Date, setDate] = useState("");
   // eslint-disable-next-line no-unused-vars
-  const {
-    setDisplaySearchResults,
-    DisplayForm,
-    setDisplayForm,
-    ActivityToAdd,
-    setActivityToAdd,
-  } = useContext(DisplayContext);
+  const { setDisplaySearchResults, DisplayForm, setDisplayForm } =
+    useContext(DisplayContext);
+  const { ActivityToAdd, setActivityToAdd } = useContext(ApiContext);
 
   function addActivityToTravel() {
-
+    console.log(`AddActivityForm: Date = ${Date.toString()}`);
     setDisplaySearchResults(false);
     setDisplayForm("");
   }
@@ -39,7 +35,7 @@ export function AddActivityForm({ className = "" }) {
         >
           <h1>{ActivityToAdd.label}</h1>
           <Input
-            type="date"
+            type="datetime"
             name="Date"
             onChange={(e) => setDate(e.target.value)}
             label="Date"

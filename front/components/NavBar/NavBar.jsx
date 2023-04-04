@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Button } from "../Button";
-import logo from "../../public/logo-no-background.png";
+// import logo from "@/public/logo-no-background.png";
 import Image from "next/image";
 import { FiMenu } from "react-icons/fi";
 import { useState } from "react";
@@ -31,7 +31,12 @@ export function NavBar() {
             px-4 shadow-2xl h-18 w-full bg-white flex place-items-center place-content-between "
       >
         <div id="Logo" className="flex h-16 place-items-center">
-          <Image src={logo} height={50} width={50} alt="Logo" />
+          <Image
+            src={require(".//../../public/logo-no-background.png")}
+            height={50}
+            width={50}
+            alt="Logo"
+          />
           <p id="SiteTitle" className="flex w-auto ml-5 font-Montaga text-xl">
             Trip Tise
           </p>
@@ -49,7 +54,7 @@ export function NavBar() {
             className=""
             label="Se connecter"
             alternate={true}
-          ></Button>
+          />
           <div id="buffer" className="w-2 flex-shrink"></div>
           <Button
             onClick={handleClickSignIn}

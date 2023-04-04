@@ -85,6 +85,17 @@ function Input({
         {...props}
       />
     ),
+    datetime: (
+      <input
+        onChange={onChange}
+        id={name}
+        name={name}
+        placeholder={placeholder}
+        className={CLASS_NAME}
+        type="datetime-local"
+        {...props}
+      />
+    ),
   };
   return (
     <div className={joinClasses(["flex flex-col w-auto", className])}>

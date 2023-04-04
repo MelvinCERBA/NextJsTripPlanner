@@ -1,13 +1,13 @@
 import React from "react";
-import { SearchResultsContext } from "@/contexts";
+import { ApiContext } from "@/contexts";
 import { useContext } from "react";
 import { Activity } from "./components";
 
 export function SearchResults() {
   // eslint-disable-next-line no-unused-vars
-  const { SearchResults, setSearchResults } = useContext(SearchResultsContext);
+  const { SearchResults, setSearchResults } = useContext(ApiContext);
   console.log(
-    `SEARCHRESULTS : Consuming SearchResultsContext : ${JSON.stringify(
+    `SEARCHRESULTS : Consuming ApiContext : ${JSON.stringify(
       SearchResults
     )}`
   );

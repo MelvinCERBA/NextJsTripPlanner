@@ -3,10 +3,17 @@
  */
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { NavBar } from "./NavBar";
+import { NavBar } from "../NavBar";
+import { ApiContextWrapper, DisplayContextWrapper } from "@/contexts";
 
 describe("NavBar", () => {
-  const { container, getByText, debug } = render(<NavBar />);
+  const { container, getByText, debug } = render(
+    <ApiContextWrapper>
+      <DisplayContextWrapper>
+        <NavBar />
+      </DisplayContextWrapper>
+    </ApiContextWrapper>
+  );
   // render(<NavBar/>);
   const title = getByText("Trip Tise");
   const btn_login = getByText("Se connecter");

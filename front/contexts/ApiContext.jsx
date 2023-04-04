@@ -47,8 +47,14 @@ export function ApiContextWrapper({ children }) {
   const [Travel, setTravel] = useState(cities);
   const [SearchResults, setSearchResults] = useState(activities);
   const [ActivityToAdd, setActivityToAdd] = useState(null);
+  const [User, setUser] = useState(null);
   console.log(
-    `API CONTEXT : Setting ApiContext value : ${JSON.stringify(Travel)}`
+    `API CONTEXT : Initializing travel value : ${JSON.stringify(Travel)}`
+  );
+  console.log(
+    `API CONTEXT : Initializing SearchResults value : ${JSON.stringify(
+      SearchResults
+    )}`
   );
 
   useEffect(() => {
@@ -64,6 +70,8 @@ export function ApiContextWrapper({ children }) {
         setSearchResults,
         ActivityToAdd,
         setActivityToAdd,
+        User,
+        setUser,
       }}
     >
       {children}

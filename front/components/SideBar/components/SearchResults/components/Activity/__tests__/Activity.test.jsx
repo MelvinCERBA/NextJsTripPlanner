@@ -1,26 +1,13 @@
+/* eslint-disable no-undef */
 /**
  * @jest-environment jsdom
  */
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
-import { ActivityMd } from "../ActivityMd";
-import { formatCurrency } from "../../../commands/utils";
-import { MyErrorBoundary } from "../../../commands/utils";
+import { render } from "@testing-library/react";
+import { Activity } from "..";
+import React from "react";
 
-describe("ActivityMd", () => {
-  // const {
-  // 	container,
-  // 	getByText,
-  // 	debug
-  // } = render(
-  //     <ActivityMd
-  //         price={15}
-  //         label={"label"}
-  //         adress={"adress"}
-  //         desc={"desc"}
-  //         link={"link"}
-  //         />);
-
+describe("Activity", () => {
   it.each([
     [
       15,
@@ -35,8 +22,8 @@ describe("ActivityMd", () => {
     "Correct information result in appropriate display.",
     (price, label, adress, desc, link) => {
       try {
-        const { container, getByText } = render(
-          <ActivityMd
+        const { getByText } = render(
+          <Activity
             price={price}
             label={label}
             adress={adress}
@@ -72,7 +59,7 @@ describe("ActivityMd", () => {
       let errorMsg;
       try {
         render(
-          <ActivityMd
+          <Activity
             price={price}
             label={label}
             adress={adress}
@@ -98,7 +85,7 @@ describe("ActivityMd", () => {
       let errorMsg;
       try {
         render(
-          <ActivityMd
+          <Activity
             price={price}
             label={label}
             adress={adress}

@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { ActivityLg, ActivityMd } from ".";
-import { DisplayContext } from "@/contexts";
+import { ApiContext } from "@/contexts";
 
 export const Activity = ({ label, adress, price, desc, link }) => {
   if (!label) {
     throw new Error("Activty needs a name.");
   }
-  const { setActivityToAdd } = useContext(DisplayContext);
+  const { setActivityToAdd } = useContext(ApiContext);
   function setSelectedActivity() {
     setActivityToAdd({ label, adress, price, desc, link });
   }
