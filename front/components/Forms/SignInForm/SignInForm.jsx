@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { joinClasses } from "../../../commands/utils";
 import { Input } from "@/components";
 import { Button } from "@/components";
 import { useState } from "react";
-import { DisplayContext } from "@/contexts";
+import { DisplayContext, ApiContext } from "@/contexts";
 
 export function SignInForm({ className = "" }) {
   const { setDisplayForm } = useContext(DisplayContext);
@@ -12,6 +12,21 @@ export function SignInForm({ className = "" }) {
   const [mdp, setMdp] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [mdpConfirm, setMdpConfirm] = useState("");
+  const [Retry, setRetry] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const { userDataHandler, AuthError, AuthLoading, AuthConnected } =
+    useContext(ApiContext);
+
+  useEffect(() => {
+    if (AuthConnected) {
+      setDisplayForm("");
+    }
+  }, [AuthConnected]);
+
+  function handleRegisterClicked() {
+    setRetry(true);
+    // userDataHandler(Pseudo, Mdp);
+  }
 
   return (
     <>

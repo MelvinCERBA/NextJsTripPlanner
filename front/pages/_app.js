@@ -1,15 +1,17 @@
 import "../styles/main.css";
 import React from "react";
-import { ApiContextWrapper, DisplayContextWrapper } from "@/contexts";
+import { ApiContextWrapper, DisplayContextWrapper, MapContextWrapper } from "@/contexts";
 
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <DisplayContextWrapper>
-        <ApiContextWrapper>
-          <Component {...pageProps} />
-        </ApiContextWrapper>
-      </DisplayContextWrapper>
+      <MapContextWrapper>
+        <DisplayContextWrapper>
+          <ApiContextWrapper>
+            <Component {...pageProps} />
+          </ApiContextWrapper>
+        </DisplayContextWrapper>
+      </MapContextWrapper>
     </>
   );
 }

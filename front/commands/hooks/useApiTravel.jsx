@@ -1,11 +1,9 @@
 /* eslint-disable no-undef */
-import { useState, useEffect } from "react";
-import useCookie from "react-use-cookie";
+import { useState } from "react";
 import axios from "axios";
 
 export const useApiTravel = () => {
   const [error, setError] = useState("");
-  const [Travels, setTravels] = useState(false);
 
   async function getTravels() {
     try {
@@ -14,7 +12,10 @@ export const useApiTravel = () => {
           "X-Token": cookie_userToken,
         },
       });
-      setTravels(data.result);
+      console.log(
+        `USEAPICONTEXT: travels recuperated : ${JSON.stringify(data.result)}`
+      );
+      return data.result;
     } catch (error) {
       setError(error);
     }
@@ -29,10 +30,11 @@ export const useApiTravel = () => {
         },
         data: travel_json,
       });
+      return data.result;
     } catch (error) {
       setError(error);
     }
   }
 
-  return [Travels, getTravels];
+  return [saveTravel, getTravels, error];
 };

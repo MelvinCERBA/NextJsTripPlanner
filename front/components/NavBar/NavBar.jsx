@@ -4,10 +4,11 @@ import { Button } from "../Button";
 import Image from "next/image";
 import { FiMenu } from "react-icons/fi";
 import { useState } from "react";
-import { DisplayContext } from "@/contexts";
+import { ApiContext, DisplayContext } from "@/contexts";
 
 export function NavBar() {
   const { DisplayForm, setDisplayForm } = useContext(DisplayContext);
+  const { AuthConnected, userDataHandler } = useContext(ApiContext);
 
   useEffect(() => {
     console.log(`NAVBAR: displayForm changed : ${DisplayForm}`);
@@ -20,6 +21,10 @@ export function NavBar() {
   function handleClickSignIn() {
     setDisplayForm("sign");
     console.log("signin fucntion called");
+  }
+  function handleClickDisconnect(e) {
+    e.stopPropagation();
+    userDataHandler("", "", { register: false, disconnect: true });
   }
 
   let [menuOpen, setOpenMenu] = useState(false);
@@ -45,31 +50,53 @@ export function NavBar() {
           id="menu"
           className="
                     relative right-1 hidden h-16 my-2
-                    lg:flex lg:justify-center lg:align-center"
+                    lg:flex lg:justify-center lg:items-center"
         >
-          <div id="buffer" className="w-12 flex-shrink"></div>
-          <Button
-            onClick={handleClickLogIn}
-            id="BtnLogIn"
-            className=""
-            label="Se connecter"
-            alternate={true}
-          />
-          <div id="buffer" className="w-2 flex-shrink"></div>
-          <Button
-            onClick={handleClickSignIn}
-            id="BtnSignIn"
-            className=""
-            label="S'enregistrer"
-            alternate={false}
-          ></Button>
+          <div id="buffer" className="w-12 flex-shrink" />
+          {AuthConnected ? (
+            <div className="flex text-orange-main">
+              <p
+                onClick={() => setDisplayForm("choose-travel")}
+                className="hover:text-orange-secondary"
+              >
+                Voyages
+              </p>
+              <div id="buffer" className="w-4 flex-shrink"></div>
+              <p
+                onClick={(e) => {
+                  handleClickDisconnect(e);
+                }}
+                className="hover:text-orange-secondary"
+              >
+                Déconnexion
+              </p>
+            </div>
+          ) : (
+            <>
+              <Button
+                onClick={handleClickLogIn}
+                id="BtnLogIn"
+                className=""
+                label="Se connecter"
+                alternate={true}
+              />
+              <div id="buffer" className="w-2 flex-shrink"></div>
+              <Button
+                onClick={handleClickSignIn}
+                id="BtnSignIn"
+                className=""
+                label="S'enregistrer"
+                alternate={false}
+              />
+            </>
+          )}
         </div>
         <div
           onClick={() => setOpenMenu(!menuOpen)}
           id="burgerMenu"
           className="w-16 h-16 flex lg:hidden"
         >
-          <FiMenu className="w-16 h-16 text-orange-main"></FiMenu>
+          <FiMenu className="w-16 h-16 text-orange-main" />
         </div>
       </div>
       {menuOpen && (

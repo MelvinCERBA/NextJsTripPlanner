@@ -1,19 +1,22 @@
 import axios from "axios";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import { TripSearchBar } from "..";
 import mapboxgl from "!mapbox-gl";
-import { useEffect } from "react";
+import { MapContext } from "@/contexts";
 import { joinClasses } from "@/commands";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam9uYXRoYW5lbW1hbnVlbGpvc2UiLCJhIjoiY2xlY3M5ZG5mMDAwODNvcDl0YTd6dDJ4MyJ9.41z7trqtNa8IpWd_J2Q6tw";
 
+// mapboxgl.accessToken =
+// // eslint-disable-next-line no-undef
+// process.env.GEOMAP_TOKEN ?? process.env.STORYBOOK_GEOMAP_TOKEN;
+
 export function GeoMap({ className }) {
-  const [results, setResults] = useState([]);
-  const [search, setSearch] = useState({ type: "", city: "", radius: "" });
+  const [results, setResults] = useState([]); // City suggestions
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [coords, setCoords] = useState([2.3522219, 48.856614]);
+  const { coords, setCoords, search, setSearch } = useContext(MapContext);
   const [displayResults, setDisplayResults] = useState(false);
 
   useEffect(() => {

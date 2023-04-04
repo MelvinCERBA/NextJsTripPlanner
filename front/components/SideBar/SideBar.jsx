@@ -10,13 +10,6 @@ export function SideBar({ displayMap, setDisplayMap, className = "" }) {
   // eslint-disable-next-line no-unused-vars
   const { DisplaySearchResults, setDisplaySearchResults } =
     useContext(DisplayContext);
-  console.log(`SIDEBAR: DisplaySearchResults = ${DisplaySearchResults}`);
-
-  useEffect(() => {
-    console.log(
-      `SIDEBAR: DisplaySearchResults changed : ${DisplaySearchResults}`
-    );
-  }, [DisplaySearchResults]);
 
   return (
     <>

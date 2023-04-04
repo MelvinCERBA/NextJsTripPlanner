@@ -1,19 +1,28 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { joinClasses } from "../../../commands/utils";
 import { Input } from "@/components";
 import { Button } from "@/components";
-import { useState } from "react";
 import { DisplayContext, ApiContext } from "@/contexts";
 
 export function LogInForm({ className = "" }) {
   const { setDisplayForm } = useContext(DisplayContext);
   const [Pseudo, setPseudo] = useState("");
   const [Mdp, setMdp] = useState("");
-  const { userDataHandler, error } = useContext(ApiContext);
+  const [Retry, setRetry] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const { userDataHandler, AuthError, AuthLoading, AuthConnected } =
+    useContext(ApiContext);
 
-  console.log(
-    `LOGINFORM: error (length: ${JSON.stringify(error).length}) = ${error}`
-  );
+  useEffect(() => {
+    if (AuthConnected) {
+      setDisplayForm("");
+    }
+  }, [AuthConnected]);
+
+  function handleConnectClicked() {
+    setRetry(true);
+    userDataHandler(Pseudo, Mdp);
+  }
 
   return (
     <>
@@ -47,13 +56,9 @@ export function LogInForm({ className = "" }) {
             placeholder="p4S5w0Rd"
             className="basis-2/12"
           />
-          {JSON.stringify(error).length > 2 ? <p>retry</p> : <></>}
-          <Button
-            onClick={() => {
-              userDataHandler(Pseudo, Mdp);
-            }}
-            label="Connexion"
-          />
+          {Retry && !AuthLoading ? <p>Connection failed.</p> : <></>}
+          {AuthLoading ? <p>Loading ...</p> : <></>}
+          <Button onClick={handleConnectClicked} label="Connexion" />
           <Button
             onClick={() => setDisplayForm("sign")}
             alternate={true}

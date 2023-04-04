@@ -1,6 +1,11 @@
 import React from "react";
 import { GeoMap, SideBar } from "../components";
-import { LogInForm, SignInForm, AddActivityForm } from "@/components";
+import {
+  LogInForm,
+  SignInForm,
+  AddActivityForm,
+  ChooseTravelForm,
+} from "@/components";
 import { useState, useEffect, useContext } from "react";
 import { NavBar } from "../components/";
 import { DisplayContext } from "@/contexts";
@@ -23,6 +28,8 @@ export default function Home() {
         return <SignInForm />;
       case "add-activity":
         return <AddActivityForm />;
+      case "choose-travel":
+        return <ChooseTravelForm />;
       default:
         return <></>;
     }
