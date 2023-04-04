@@ -51,11 +51,20 @@ test("inits without user then log in succesfully", async () => {
   const password = "password";
 
   const { result } = renderHook(() => useAuth());
-  expect(result.current[0]).toEqual({});
+  expect(result.current[0]).toEqual({
+    token: "",
+    username: "",
+  });
 
   act(() => {
     result.current[1](username, password);
   });
 
-  expect(result.current[0].username).toEqual(undefined);
+  expect(result.current[0].username).toEqual("");
+
+  act(() => {
+    result.current[2]();
+  });
+
+  expect(result.current[0].username).toEqual("");
 });
