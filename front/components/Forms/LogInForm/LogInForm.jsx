@@ -3,12 +3,17 @@ import { joinClasses } from "../../../commands/utils";
 import { Input } from "@/components";
 import { Button } from "@/components";
 import { useState } from "react";
-import { DisplayContext } from "@/contexts";
+import { DisplayContext, ApiContext } from "@/contexts";
 
 export function LogInForm({ className = "" }) {
   const { setDisplayForm } = useContext(DisplayContext);
-  const [email, setEmail] = useState("");
-  const [mdp, setMdp] = useState("");
+  const [Pseudo, setPseudo] = useState("");
+  const [Mdp, setMdp] = useState("");
+  const { userDataHandler, error } = useContext(ApiContext);
+
+  console.log(
+    `LOGINFORM: error (length: ${JSON.stringify(error).length}) = ${error}`
+  );
 
   return (
     <>
@@ -28,23 +33,24 @@ export function LogInForm({ className = "" }) {
         >
           <Input
             type="text"
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-            label="Email"
-            placeholder="gg69@gmail.com"
+            name="pseudo"
+            onChange={(e) => setPseudo(e.target.value)}
+            label="Pseudo"
+            placeholder="GGdu69"
             className="basis-3/12"
           />
           <Input
             type="password"
-            name="mdp"
+            name="Mdp"
             onChange={(e) => setMdp(e.target.value)}
             label="Mot de passe"
             placeholder="p4S5w0Rd"
             className="basis-2/12"
           />
+          {JSON.stringify(error).length > 2 ? <p>retry</p> : <></>}
           <Button
             onClick={() => {
-              console.log(`email: ${email}, mdp: ${mdp}`);
+              userDataHandler(Pseudo, Mdp);
             }}
             label="Connexion"
           />

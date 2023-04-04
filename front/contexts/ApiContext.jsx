@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { createContext, useState } from "react";
 import axios from "axios";
+import { useAuth } from "@/commands";
 
 export const ApiContext = createContext();
 
@@ -49,14 +50,8 @@ export function ApiContextWrapper({ children }) {
   const [SearchResults, setSearchResults] = useState(activities);
   const [ActivityToAdd, setActivityToAdd] = useState(null);
   const [User, setUser] = useState(null);
-  console.log(
-    `API CONTEXT : Initializing travel value : ${JSON.stringify(Travel)}`
-  );
-  console.log(
-    `API CONTEXT : Initializing SearchResults value : ${JSON.stringify(
-      SearchResults
-    )}`
-  );
+  // eslint-disable-next-line no-unused-vars
+  const [{ username, token }, userDataHandler, disconnect, error] = useAuth();
 
   useEffect(() => {
     // TODO update le voyage dans le back quand le voyage est modifié localement
@@ -73,6 +68,8 @@ export function ApiContextWrapper({ children }) {
         setActivityToAdd,
         User,
         setUser,
+        userDataHandler,
+        error,
       }}
     >
       {children}
