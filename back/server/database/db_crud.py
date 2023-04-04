@@ -35,17 +35,9 @@ class Crud:
     def get_user(self, username: str):
         return self.user_collection.find_one({"username": username})
 
-    def get_roadtrips(self, username: str, city: str):
+    def get_roadtrips(self, username: str):
         user = self.get_user(username)
-        result = []
-
-        for saved in user["save"]:
-            if ("steps" in saved.keys()):
-                for step in saved["steps"]:
-                    if (step["city"].lower() == city.lower()):
-                        result.append(saved)
-
-        return (result)
+        return (user["save"])
 
     def count_user_collection(self):
         return self.user_collection.count_documents({})
