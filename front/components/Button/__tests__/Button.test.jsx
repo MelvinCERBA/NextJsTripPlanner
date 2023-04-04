@@ -25,8 +25,6 @@ test("it click on basic button", async () => {
 });
 
 test("it change the input value", async () => {
-  const [word, setWord] = useState("");
-
   render(
     <Button
       label={LABEL_VALUE}

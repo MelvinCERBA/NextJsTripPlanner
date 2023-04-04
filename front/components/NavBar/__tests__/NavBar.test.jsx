@@ -6,7 +6,7 @@
 import React from "react";
 
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import { NavBar } from "../NavBar";
 import { ApiContextWrapper, DisplayContextWrapper } from "@/contexts";
 import { fireEvent } from "@storybook/testing-library";
@@ -77,13 +77,15 @@ describe("NavBar", () => {
       </ApiContextWrapper>
     );
 
-    fireEvent(
-      getByText("Se connecter"),
-      new MouseEvent("click", {
-        bubbles: true,
-        cancelable: true,
-      })
-    );
+    act(() => {
+      fireEvent(
+        getByText("Se connecter"),
+        new MouseEvent("click", {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+    });
 
     expect(screen.getByText("Trip Tise")).toBeInTheDocument();
   });
@@ -97,13 +99,15 @@ describe("NavBar", () => {
       </ApiContextWrapper>
     );
 
-    fireEvent(
-      getByText("S'enregistrer"),
-      new MouseEvent("click", {
-        bubbles: true,
-        cancelable: true,
-      })
-    );
+    act(() => {
+      fireEvent(
+        getByText("S'enregistrer"),
+        new MouseEvent("click", {
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+    });
 
     expect(screen.getByText("Trip Tise")).toBeInTheDocument();
   });
