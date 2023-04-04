@@ -128,7 +128,7 @@ async def post_save(x_token: Union[List[str], None] = Header(default=None), road
     return (responder)
 
 @router.get("/roadtrips")
-async def get_roadtrips(x_token: Union[List[str], None] = Header(default=None), city: str = None, response: Response = None):
+async def get_roadtrips(x_token: Union[List[str], None] = Header(default=None)):
     decrypted = None
     credentials = None
     responder = None
@@ -138,8 +138,8 @@ async def get_roadtrips(x_token: Union[List[str], None] = Header(default=None), 
         decrypted = Authentification.decrypt(x_token[0])
         if (decrypted != None):
             credentials = json.loads(decrypted)
-            result = Crud.get_roadtrips(credentials["user"], city)
-            responder = Responder.Send(
+            result = Crud.get_roadtrips(credentials["user"])
+            return (Responder.Send(
                 data = {
                     "message": "ok",
                     "result": result
