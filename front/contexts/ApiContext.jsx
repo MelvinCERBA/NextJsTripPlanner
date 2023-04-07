@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { createContext, useState } from "react";
-import axios from "axios";
 import { useAuth } from "@/commands";
 import { useApiTravel } from "@/commands/hooks/useApiTravel";
 
 export const ApiContext = createContext();
 
 export function ApiContextWrapper({ children }) {
+  console.log(`API_CONTEXT : Rendering. ${1}`);
   const events = [
     { name: "activité 1", date: Date.now(), price: 15 },
     { name: "activité 2", date: Date.now(), price: 15 },
@@ -78,10 +78,9 @@ export function ApiContextWrapper({ children }) {
       adress: "32 rue Emile Zola",
     },
   ];
-  //TODO get le voyage et les resultats de la recherche depuis l'api
-  const [Travel, setTravel] = useState(travel1);
-  const [AllTravels, setAllTravels] = useState([travel1, travel2, travel3]);
-  const [Travels, setTravels] = useState("");
+  const [saveTravel, getTravels] = useApiTravel();
+  const [Travels, setTravels] = useState();
+  const [Travel, setTravel] = useState();
   const [SearchResults, setSearchResults] = useState(activities);
   const [ActivityToAdd, setActivityToAdd] = useState(null);
   const [User, setUser] = useState(null);
@@ -93,34 +92,33 @@ export function ApiContextWrapper({ children }) {
     AuthLoading,
     AuthConnected,
   ] = useAuth();
-  const [saveTravel, getTravels] = useApiTravel();
 
-  useEffect(() => {
-    setAllTravels(getTravels()); // Todo:  Put Travels in the useTravelApi hook
-    console.log(
-      `APICONTEXT: useEffect Called, allTravels : ${JSON.stringify(AllTravels)}`
-    );
-  }, [AuthConnected]);
+  function saveTravelToApi(travel) {
+    saveTravel(travel);
+    fetchTravels();
+  }
 
-  useEffect(() => {
-    try {
-      setTravels(getTravels);
-    } catch (e) {
-      console.log(e);
-    }
-  }, [AuthConnected]);
+  const fetchTravels = useCallback(async () => {
+    const data = await getTravels();
+    console.log(`APICONTEXT : gotten data ${JSON.stringify(await data)}`);
+    setTravels(await data);
+    setTravel(await data[0]);
+  }, []);
 
+  const dataFetchedRef = useRef(false);
   useEffect(() => {
-    // TODO update le voyage dans le back quand le voyage est modifié localement
-  }, [Travel]);
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+    fetchTravels().catch(console.error);
+  }, []);
 
   return (
     <ApiContext.Provider
       value={{
         Travel,
         setTravel,
-        AllTravels,
-        setAllTravels,
+        Travels,
+        setTravels,
         SearchResults,
         setSearchResults,
         ActivityToAdd,
@@ -131,6 +129,8 @@ export function ApiContextWrapper({ children }) {
         AuthError,
         AuthLoading,
         AuthConnected,
+        saveTravel,
+        getTravels,
       }}
     >
       {children}

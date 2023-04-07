@@ -8,12 +8,10 @@ export function ChooseTravelForm({ className = "" }) {
   const { setDisplaySearchResults, DisplayForm, setDisplayForm } =
     useContext(DisplayContext);
   // eslint-disable-next-line no-unused-vars
-  const { AllTravels, setTravel } = useContext(ApiContext);
+  const { Travels, setTravel } = useContext(ApiContext);
 
   useEffect(() => {
-    AllTravels.map((t) =>
-      console.log(`CHOOSETRAVELFORM: travel.name ${t.name}`)
-    );
+    Travels.map((t) => console.log(`CHOOSETRAVELFORM: travel.name ${t.name}`));
   }, []);
 
   function handleClickSetTravel(event, travel) {
@@ -36,15 +34,19 @@ export function ChooseTravelForm({ className = "" }) {
             "flex opacity-100 flex-col justify-center z-20 flex-wrap gap-4 w-fit h-fit p-5 rounded-md shadow-xl bg-white ",
           ])}
         >
-          {AllTravels.map((t) => (
-            <h1
-              key={t.name}
-              onClick={(e) => handleClickSetTravel(e, t)}
-              className="text-orange-main hover:text-orange-secondary"
-            >
-              {t.name}
-            </h1>
-          ))}
+          {Travels ? (
+            Travels.map((t) => (
+              <h1
+                key={t.name ? t.name : JSON.stringify(t.steps[0].city)}
+                onClick={(e) => handleClickSetTravel(e, t)}
+                className="text-orange-main hover:text-orange-secondary"
+              >
+                {t.name}
+              </h1>
+            ))
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>

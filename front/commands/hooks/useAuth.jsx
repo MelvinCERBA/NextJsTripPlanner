@@ -18,11 +18,12 @@ export const useAuth = () => {
   }, [Connected]);
 
   async function connectWithToken(token = "") {
-    console.log("USEAUTH: connecting with token");
+    console.log(`USEAUTH: connecting with token ${token}`);
     try {
       const { data } = await axios.get("http://localhost:8081/user/profile", {
         headers: {
           "X-Token": token,
+          "Access-Control-Allow-Origin": "*",
         },
       });
       setConnected(true);
