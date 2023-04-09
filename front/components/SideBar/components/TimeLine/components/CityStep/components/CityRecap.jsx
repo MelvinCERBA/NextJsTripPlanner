@@ -7,13 +7,13 @@ import { DisplayContext } from "@/contexts";
 export function CityRecap({ city_name, total_price, start, end }) {
   const { DisplaySearchResults, setDisplaySearchResults } =
     useContext(DisplayContext);
-  function handleSearchActivityClick(e) {
-    e.stopPropagation();
-    setDisplaySearchResults(true);
-    console.log(
-      `CITYRECAP : clicked searchactivitybutton, displaySearchResults = ${DisplaySearchResults}`
-    );
-  }
+
+  const options = {
+    weekday: "short",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
   return (
     <div className="px-5 flex items-center h-[75px]">
       <Divider type="vertical" className="h-4/5" />
@@ -27,7 +27,9 @@ export function CityRecap({ city_name, total_price, start, end }) {
           </span>
         </div>
         <span className="text-gray-700 text-md truncate px-5">
-          {start} - {end}
+          {`${new Date(start).toLocaleString("fr", options)} - ${new Date(
+            end
+          ).toLocaleString("fr", options)}`}
         </span>
       </div>
     </div>

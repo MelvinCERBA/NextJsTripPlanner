@@ -15,8 +15,6 @@ export const ActivityRecapLg = ({
   className,
 }) => {
   const full_date = new Date(date);
-  const month = full_date.toLocaleString("fr", { month: "short" });
-  const day = full_date.getDay();
 
   return (
     <div
@@ -30,8 +28,10 @@ export const ActivityRecapLg = ({
         id="hour_container"
         className="aspect-square flex flex-col justify-center h-full "
       >
-        <span className=" font-bold text-xl ">
-          {day} {month}
+        <span className=" font-bold text-2xl self-end ">
+          {full_date.toLocaleString("fr", { weekday: "short" })}
+          <br />
+          {full_date.toLocaleString("fr", { day: "numeric", month: "short" })}
         </span>
       </div>
       <Divider type="vertical" className="h-4/5" />
