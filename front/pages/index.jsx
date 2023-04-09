@@ -37,7 +37,7 @@ export default function Home() {
         <div
           className={`${
             displayMap ? "hidden lg:flex" : "flex"
-          } flex-col w-full lg:basis-1 h-full lg:flex-shrink-0.2 lg:flex-grow-0`}
+          } flex-col w-full lg:basis-5/12 h-full lg:flex-shrink-0.2 lg:flex-grow-0`}
         >
           <NavBar />
           <SideBar
@@ -51,7 +51,7 @@ export default function Home() {
           setDisplayMap={setDisplayMap}
           className={`${
             displayMap ? "flex" : "hidden lg:flex"
-          } flex-col h-[90vh] lg:basis-[700px] lg:flex-shrink-0.8 lg:flex-grow-1`}
+          } flex-col h-[90vh] lg:basis-7/12 lg:flex-shrink-0.8 lg:flex-grow-1`}
         />
       </div>
       {renderForm()}
