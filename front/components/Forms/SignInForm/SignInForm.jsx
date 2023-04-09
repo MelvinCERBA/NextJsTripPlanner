@@ -8,8 +8,8 @@ import { DisplayContext, ApiContext } from "@/contexts";
 export function SignInForm({ className = "" }) {
   const { setDisplayForm } = useContext(DisplayContext);
 
-  const [email, setEmail] = useState("");
-  const [mdp, setMdp] = useState("");
+  const [Pseudo, setPseudo] = useState("");
+  const [Mdp, setMdp] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [mdpConfirm, setMdpConfirm] = useState("");
   const [Retry, setRetry] = useState(false);
@@ -23,9 +23,9 @@ export function SignInForm({ className = "" }) {
     }
   }, [AuthConnected]);
 
-  function handleRegisterClicked() {
-    setRetry(true);
-    // userDataHandler(Pseudo, Mdp);
+  function handleClickRegister(e) {
+    e.stopPropagation();
+    userDataHandler(Pseudo, Mdp, { register: true, disconnect: false });
   }
 
   return (
@@ -46,9 +46,9 @@ export function SignInForm({ className = "" }) {
         >
           <Input
             type="text"
-            onChange={(e) => setEmail(e.target.value)}
-            label="Email"
-            placeholder="gg69@gmail.com"
+            onChange={(e) => setPseudo(e.target.value)}
+            label="Pseudo"
+            placeholder="GGdu69"
             className="basis-3/12"
           />
           <Input
@@ -66,9 +66,7 @@ export function SignInForm({ className = "" }) {
             className="basis-2/12"
           />
           <Button
-            onClick={() => {
-              console.log(`email: ${email} mdp: ${mdp}`);
-            }}
+            onClick={(e) => handleClickRegister(e)}
             label="Créer un compte"
           />
           <Button

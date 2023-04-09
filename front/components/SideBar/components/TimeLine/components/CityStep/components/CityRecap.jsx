@@ -20,15 +20,11 @@ export function CityRecap({ city_name, total_price, start, end }) {
       <div className="flex flex-col ">
         <div className="flex">
           <span className="font-bold text-2xl truncate w-auto px-5">
-            {city_name} ({formatCurrency(total_price)})
+            {city_name}{" "}
+            {total_price && total_price > 0
+              ? `(${formatCurrency(total_price)})`
+              : ""}
           </span>
-          <div
-            onClick={(e) => handleSearchActivityClick(e)}
-            className="flex text-orange-main items-center hover:text-orange-secondary"
-          >
-            <AiOutlineSearch size={30} />
-            <p>Activités</p>
-          </div>
         </div>
         <span className="text-gray-700 text-md truncate px-5">
           {start} - {end}

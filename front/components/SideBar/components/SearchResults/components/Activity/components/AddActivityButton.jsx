@@ -1,19 +1,22 @@
 import React, { useContext } from "react";
 import { FiPlus } from "react-icons/Fi";
-import { DisplayContext } from "@/contexts";
+import { DisplayContext, ApiContext } from "@/contexts";
 
-
-export function AddActivityButton({ setSelectedActivity }) {
+export function AddActivityButton({ activity }) {
   const { setDisplayForm } = useContext(DisplayContext);
+  const { setActivityToAdd } = useContext(ApiContext);
 
-  function handleClick(e) {
+  function handleClickAddActivity(e) {
     e.stopPropagation();
-    setSelectedActivity();
+    setActivityToAdd(activity);
+    console.log(
+      `ADD ACTIVITY BUTTON: set ActivityToAdd to ${JSON.stringify(activity)}`
+    );
     setDisplayForm("add-activity");
   }
   return (
     <div
-      onClick={handleClick}
+      onClick={(e) => handleClickAddActivity(e)}
       className="flex text-orange-main items-center hover:text-orange-secondary gap-1 w-fit"
     >
       <div id="icon-container">

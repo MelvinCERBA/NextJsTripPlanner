@@ -4,6 +4,7 @@ import {
   LogInForm,
   SignInForm,
   AddActivityForm,
+  AddCityForm,
   ChooseTravelForm,
 } from "@/components";
 import { useState, useEffect, useContext } from "react";
@@ -16,10 +17,6 @@ export default function Home() {
   // eslint-disable-next-line no-unused-vars
   const { DisplayForm, setDisplayForm } = useContext(DisplayContext);
 
-  useEffect(() => {
-    console.log(`NAVBAR: displayForm changed : ${DisplayForm}`);
-  }, [DisplayForm]);
-
   function renderForm() {
     switch (DisplayForm) {
       case "log":
@@ -30,6 +27,8 @@ export default function Home() {
         return <AddActivityForm />;
       case "choose-travel":
         return <ChooseTravelForm />;
+      case "add-city":
+        return <AddCityForm />;
       default:
         return <></>;
     }

@@ -1,31 +1,36 @@
-import React from "react";
-import { ApiContext } from "@/contexts";
+import React, { useEffect } from "react";
+import { MapContext } from "@/contexts";
 import { useContext } from "react";
 import { Activity } from "./components";
 
 export function SearchResults() {
   // eslint-disable-next-line no-unused-vars
-  const { SearchResults, setSearchResults } = useContext(ApiContext);
-  console.log(
-    `SEARCHRESULTS : Consuming ApiContext : ${JSON.stringify(
-      SearchResults
-    )}`
-  );
+  const { SearchResults, setSearchResults } = useContext(MapContext);
+
+  useEffect(() => {
+    console.log(
+      `SEARCH RESULTS (useEffect): Consuming ApiContext : ${JSON.stringify(
+        SearchResults
+      )}`
+    );
+  }, [SearchResults]);
 
   return (
-    <>
-      <div className="flex flex-col w-full">
-        {SearchResults.map((a) => (
+    <div className="flex flex-col w-full h-full overflow-scroll">
+      {SearchResults ? (
+        SearchResults.map((a) => (
           <Activity
-            key={a.name}
+            key={a.dupeId}
             label={a.name}
-            adress={a.adress}
-            price={a.price}
-            desc={a.desc}
-            link={a.link}
+            adress={[a.geoCode.longitude, a.geoCode.latitude]}
+            price={-1}
+            desc={""}
+            link={""}
           />
-        ))}
-      </div>
-    </>
+        ))
+      ) : (
+        <></>
+      )}
+    </div>
   );
 }

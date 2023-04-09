@@ -7,6 +7,7 @@ export const Activity = ({ label, adress, price, desc, link }) => {
     throw new Error("Activty needs a name.");
   }
   const { setActivityToAdd } = useContext(ApiContext);
+
   function setSelectedActivity() {
     setActivityToAdd({ label, adress, price, desc, link });
   }

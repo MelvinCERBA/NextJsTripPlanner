@@ -6,11 +6,11 @@ import Image from "next/image";
 import { joinClasses } from "@/commands";
 
 export const ActivityMd = ({
-  label = "Nom de l'activité",
-  adress = "Adresse de l'activité",
-  price = 0,
-  desc = "Description de l'activité",
-  link = "/",
+  label,
+  adress,
+  price,
+  desc,
+  link,
   className,
   setSelectedActivity,
 }) => {

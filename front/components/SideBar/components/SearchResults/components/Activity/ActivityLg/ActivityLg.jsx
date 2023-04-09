@@ -5,15 +5,7 @@ import defaultImg from "/public/default_activity_image.jpg";
 import Image from "next/image";
 import { joinClasses } from "@/commands";
 
-export const ActivityLg = ({
-  label,
-  adress = "Adresse inconnue.",
-  price = 0,
-  desc = "Pas de description pour l'activité",
-  link,
-  className,
-  setSelectedActivity,
-}) => {
+export const ActivityLg = ({ label, adress, price, desc, link, className }) => {
   return (
     <div
       id="activity"
@@ -48,7 +40,7 @@ export const ActivityLg = ({
         <p id="desc" className="block-with-text">
           {desc}
         </p>
-        <AddActivityButton setSelectedActivity={setSelectedActivity}/>
+        <AddActivityButton activity={{ label, adress, price, desc, link }} />
       </div>
     </div>
   );

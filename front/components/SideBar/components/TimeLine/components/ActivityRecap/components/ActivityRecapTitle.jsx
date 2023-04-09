@@ -21,7 +21,9 @@ export const ActivityRecapTitle = ({
         <span className="text-2xl font-light truncate w-auto">
           {price > 0 ? label + " - " + formatCurrency(price) : label}
         </span>
-        <span className=" text-gray-700 text-md truncate">{adress}</span>
+        <span className=" text-gray-500 text-md truncate">
+          {adress ? `${adress[0]}, ${adress[1]}` : ""}
+        </span>
       </div>
     </div>
   );

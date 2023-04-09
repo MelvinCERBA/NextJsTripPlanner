@@ -14,15 +14,7 @@ export function CityStep({ city }) {
         />
         <ul>
           {city.events.map((e) => (
-            <ActivityRecap
-              key={e.name}
-              label={e.name}
-              adress="cwx<ccxw<"
-              price={e.price}
-              desc="cs<cwv<"
-              link="https://google.fr"
-              className=" pl-20"
-            />
+            <ActivityRecap city={city.city} event={e} key={e.name} />
           ))}
         </ul>
       </div>

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Input, Divider } from "..";
 import { BsSearch } from "react-icons/bs";
-import { MdFilterAlt } from "react-icons/md";
 import { joinClasses } from "@/commands";
+import { MapContext, DisplayContext } from "@/contexts";
 
 export const TripSearchBar = ({
   onChange = {
@@ -22,6 +22,15 @@ export const TripSearchBar = ({
   displayResults = false,
   className,
 }) => {
+  const { setDisplaySearchResults } = useContext(DisplayContext);
+  const { askAmadeus } = useContext(MapContext);
+
+  async function handleClickSearch(e) {
+    e.stopPropagation();
+    await askAmadeus();
+    setDisplaySearchResults(true);
+  }
+
   return (
     <>
       <div
@@ -79,8 +88,12 @@ export const TripSearchBar = ({
             className="basis-2/12"
           />
           <Divider />
-          <BsSearch size="2.5em" className="basis-1/12 justify-end" />
-          <MdFilterAlt size="2.5em" className="basis-1/12" />
+          <div
+            className=" text-orange-main hover:text-orange-secondary"
+            onClick={(e) => handleClickSearch(e)}
+          >
+            <BsSearch size="2.5em" className="basis-1/12 justify-end" />
+          </div>
         </div>
       </div>
       <div className="sm:hidden rounded-xl shadow-2xl px-8 py-5 flex flex-col gap-4">
@@ -132,8 +145,11 @@ export const TripSearchBar = ({
           />
         </div>
         <div className="flex justify-center flex-col-2 gap-4">
-          <BsSearch size="2.5em" className="basis-1/2" />
-          <MdFilterAlt size="2.5em" className="basis-1/2" />
+          <BsSearch
+            onClick={(e) => handleClickSearch(e)}
+            size="2.5em"
+            className="basis-1/2"
+          />
         </div>
       </div>
     </>

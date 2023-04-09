@@ -12,7 +12,7 @@ export function SideBar({ displayMap, setDisplayMap, className = "" }) {
     useContext(DisplayContext);
 
   return (
-    <>
+    <div className="h-full">
       <div className={joinClasses(["flex flex-col h-full", className])}>
         {DisplaySearchResults ? <SearchResults /> : <TimeLine />}
       </div>
@@ -23,6 +23,6 @@ export function SideBar({ displayMap, setDisplayMap, className = "" }) {
         <GiWorld className="w-16 h-16 text-orange-main"></GiWorld>
       </div>
       {/* <LogInForm> </LogInForm> */}
-    </>
+    </div>
   );
 }

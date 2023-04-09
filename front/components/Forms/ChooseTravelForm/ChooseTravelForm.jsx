@@ -17,6 +17,7 @@ export function ChooseTravelForm({ className = "" }) {
   function handleClickSetTravel(event, travel) {
     setTravel(travel);
     setDisplayForm("");
+    setDisplaySearchResults(false);
   }
   return (
     <>

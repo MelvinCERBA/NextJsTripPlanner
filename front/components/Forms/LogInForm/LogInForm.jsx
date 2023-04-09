@@ -56,8 +56,8 @@ export function LogInForm({ className = "" }) {
             placeholder="p4S5w0Rd"
             className="basis-2/12"
           />
-          {Retry && !AuthLoading ? <p>Connection failed.</p> : <></>}
-          {AuthLoading ? <p>Loading ...</p> : <></>}
+          {/* {Retry && !AuthLoading ? <p>Connection failed.</p> : <></>}
+          {AuthLoading ? <p>Loading ...</p> : <></>} */}
           <Button onClick={handleConnectClicked} label="Connexion" />
           <Button
             onClick={() => setDisplayForm("sign")}

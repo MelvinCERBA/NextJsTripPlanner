@@ -6,13 +6,19 @@ import Image from "next/image";
 import { joinClasses } from "@/commands";
 
 export const ActivityRecapLg = ({
-  label = "Nom de l'activité",
-  adress = "Adresse de l'activité",
-  price = 0,
-  desc = "Description de l'activité",
-  link = "/",
+  label,
+  adress,
+  price,
+  desc,
+  link,
+  date,
   className,
 }) => {
+  const full_date = new Date(date);
+  console.log(`ActivityRecap : full_date = ${JSON.stringify(full_date)}`);
+  const month = full_date.toLocaleString("fr", { month: "short" });
+  const day = full_date.getDay();
+
   return (
     <div
       id="activity"
@@ -21,12 +27,12 @@ export const ActivityRecapLg = ({
         "flex place-items-center px-5 py-5 gap-2 w-full max-h-[150px]",
       ])}
     >
-      <div id="hour_container" className="aspect-square h-full ">
-        <span className=" font-bold text-3xl ">
-          {" "}
-          16h
-          <br />
-          30
+      <div
+        id="hour_container"
+        className="aspect-square flex flex-col justify-center h-full "
+      >
+        <span className=" font-bold text-xl ">
+          {day} {month}
         </span>
       </div>
       <Divider type="vertical" className="h-4/5" />

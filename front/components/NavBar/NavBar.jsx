@@ -10,24 +10,22 @@ export function NavBar() {
   const { DisplayForm, setDisplayForm } = useContext(DisplayContext);
   const { AuthConnected, userDataHandler } = useContext(ApiContext);
 
-  useEffect(() => {
-    console.log(`NAVBAR: displayForm changed : ${DisplayForm}`);
-  }, [DisplayForm]);
-
-  function handleClickLogIn() {
+  function handleClickLogIn(e) {
+    setOpenMenu(false);
+    e.stopPropagation();
     setDisplayForm("log");
-    console.log("login fucntion called");
   }
-  function handleClickSignIn() {
+  function handleClickSignIn(e) {
+    setOpenMenu(false);
+    e.stopPropagation();
     setDisplayForm("sign");
-    console.log("signin fucntion called");
   }
   function handleClickDisconnect(e) {
     e.stopPropagation();
     userDataHandler("", "", { register: false, disconnect: true });
   }
 
-  let [menuOpen, setOpenMenu] = useState(false);
+  const [menuOpen, setOpenMenu] = useState(false);
 
   return (
     <>
@@ -100,20 +98,28 @@ export function NavBar() {
         </div>
       </div>
       {menuOpen && (
-        <div className="absolute top-[80px] w-fit h-fit p-5 rounded-md z-50 shadow-xl flex lg:hidden flex-col right-5 bg-white ">
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="absolute top-[80px] w-fit h-fit p-5 rounded-md z-50 shadow-xl flex lg:hidden flex-col right-5 bg-white "
+        >
           <p
-            onClick={handleClickLogIn}
+            onClick={() => setDisplayForm("log")}
             className="text-lg font-bold text-orange-main"
           >
             Se connecter
           </p>
           <p
-            onClick={handleClickSignIn}
+            onClick={(e) => handleClickSignIn(e)}
             className="text-lg font-bold text-orange-main"
           >
             S&apos;enregistrer
           </p>
-          <p className="text-lg font-bold text-orange-main">Mes voyages</p>
+          <p
+            onClick={() => setDisplayForm("choose-travel")}
+            className="text-lg font-bold text-orange-main"
+          >
+            Mes voyages
+          </p>
         </div>
       )}
     </>
