@@ -6,6 +6,7 @@ export const DisplayContext = createContext();
 export function DisplayContextWrapper({ children }) {
   const [DisplaySearchResults, setDisplaySearchResults] = useState(false);
   const [DisplayForm, setDisplayForm] = useState("");
+  const [displayMap, setDisplayMap] = useState(false);
 
   return (
     <DisplayContext.Provider
@@ -14,6 +15,8 @@ export function DisplayContextWrapper({ children }) {
         setDisplaySearchResults,
         DisplayForm,
         setDisplayForm,
+        displayMap,
+        setDisplayMap,
       }}
     >
       {children}

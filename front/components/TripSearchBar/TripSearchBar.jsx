@@ -22,12 +22,13 @@ export const TripSearchBar = ({
   displayResults = false,
   className,
 }) => {
-  const { setDisplaySearchResults } = useContext(DisplayContext);
+  const { setDisplaySearchResults, setDisplayMap } = useContext(DisplayContext);
   const { askAmadeus } = useContext(MapContext);
 
   async function handleClickSearch(e) {
     e.stopPropagation();
     await askAmadeus();
+    setDisplayMap(false);
     setDisplaySearchResults(true);
   }
 
@@ -144,12 +145,11 @@ export const TripSearchBar = ({
             placeholder="20"
           />
         </div>
-        <div className="flex justify-center flex-col-2 gap-4">
-          <BsSearch
-            onClick={(e) => handleClickSearch(e)}
-            size="2.5em"
-            className="basis-1/2"
-          />
+        <div
+          className=" self-center text-orange-main hover:text-orange-secondary"
+          onClick={(e) => handleClickSearch(e)}
+        >
+          <BsSearch size="2.5em" className="basis-1/12 justify-end" />
         </div>
       </div>
     </>

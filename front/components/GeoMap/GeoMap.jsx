@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useState, useRef, useContext, useEffect } from "react";
 import { TripSearchBar } from "..";
 import mapboxgl from "!mapbox-gl";
-import { MapContext } from "@/contexts";
+import { MapContext, DisplayContext } from "@/contexts";
 import { joinClasses } from "@/commands";
+import { BsListUl } from "react-icons/bs";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam9uYXRoYW5lbW1hbnVlbGpvc2UiLCJhIjoiY2xlY3M5ZG5mMDAwODNvcDl0YTd6dDJ4MyJ9.41z7trqtNa8IpWd_J2Q6tw";
@@ -18,7 +19,7 @@ export function GeoMap({ className }) {
   const map = useRef(null);
   const { coords, setCoords, search, setSearch } = useContext(MapContext);
   const [displayResults, setDisplayResults] = useState(false);
-
+  const { displayMap, setDisplayMap } = useContext(DisplayContext);
   useEffect(() => {
     if (map.current) {
       map.current.panTo(coords, { duration: 2000 });
@@ -87,27 +88,34 @@ export function GeoMap({ className }) {
   };
 
   return (
-    <div className={joinClasses([className])}>
-      <div className=" flex content-center w-full" name="searchbar-container">
-        <TripSearchBar
-          cityResults={results}
-          value={search}
-          onChange={searchValuesSetters}
-          displayResults={displayResults}
-          className="w-full mx-5 bg-white"
+    <>
+      <div className={joinClasses([className])}>
+        <div
+          className=" flex content-center px-5 w-full"
+          name="searchbar-container"
+        >
+          <TripSearchBar
+            cityResults={results}
+            value={search}
+            onChange={searchValuesSetters}
+            displayResults={displayResults}
+            className="w-full bg-white"
+          />
+        </div>
+        <div
+          ref={mapContainer}
+          className="w-full h-full"
+          // md:h-[80vh] sm:h-[60vh] h-[40vh]"
         />
       </div>
-      {/* <TripSearchBar
-        cityResults={results}
-        value={search}
-        onChange={searchValuesSetters}
-        displayResults={displayResults}
-        className="box-border absolute top-4 w-[75%] bg-white mx-5"
-      /> */}
       <div
-        ref={mapContainer}
-        className="w-full md:h-[80vh] sm:h-[60vh] h-[40vh]"
-      />
-    </div>
+        onClick={() => setDisplayMap(!displayMap)}
+        className={`${
+          displayMap ? "flex" : "hidden lg:flex"
+        } h-[100px] w-[100px] absolute bottom-5 right-5 flex lg:hidden justify-center items-center rounded-full bg-white shadow-xl`}
+      >
+        <BsListUl className="w-16 h-16 text-orange-main" />
+      </div>
+    </>
   );
 }

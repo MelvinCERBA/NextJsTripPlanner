@@ -12,7 +12,7 @@ export function SideBar({ displayMap, setDisplayMap, className = "" }) {
     useContext(DisplayContext);
 
   return (
-    <div className="h-full">
+    <div className="h-[85vh] flex flex-col">
       <div className={joinClasses(["flex flex-col h-full", className])}>
         {DisplaySearchResults ? <SearchResults /> : <TimeLine />}
       </div>

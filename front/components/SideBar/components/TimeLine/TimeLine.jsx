@@ -23,8 +23,8 @@ export function TimeLine() {
   }
 
   return (
-    <div className="flex flex-col w-full overflow-scroll">
-      <div className="flex items-center justify-center bg-white shadow-xl rounded-xl m-5 p-5">
+    <div className="flex h-full flex-col w-full overflow-scroll overflow-x-hidden p-5">
+      <div className="flex items-center justify-center bg-white shadow-xl rounded-xl p-5">
         <Input
           type="text"
           label="Nom du voyage"

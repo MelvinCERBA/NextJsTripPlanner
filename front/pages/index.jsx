@@ -12,10 +12,8 @@ import { NavBar } from "../components/";
 import { DisplayContext } from "@/contexts";
 
 export default function Home() {
-  const [displayMap, setDisplayMap] = useState(false);
-  // const [displayForm, setDisplayForm] = useState("");
   // eslint-disable-next-line no-unused-vars
-  const { DisplayForm, setDisplayForm } = useContext(DisplayContext);
+  const { displayMap, setDisplayMap, DisplayForm, setDisplayForm } = useContext(DisplayContext);
 
   function renderForm() {
     switch (DisplayForm) {
@@ -34,19 +32,18 @@ export default function Home() {
     }
   }
   return (
-    <>
-      <div className="flex h-screen w-screen">
+    <div className="h-screen w-screen">
+      <div className="flex h-full w-full">
         <div
           className={`${
             displayMap ? "hidden lg:flex" : "flex"
-          } flex-col lg:basis-5/12 w-full h-full lg:w-[700px] lg:flex-shrink-0.2 lg:flex-grow-0`}
+          } flex-col w-full lg:basis-1 h-full lg:flex-shrink-0.2 lg:flex-grow-0`}
         >
           <NavBar />
           <SideBar
             key="sidebar"
             displayMap={displayMap}
             setDisplayMap={setDisplayMap}
-            className=""
           />
         </div>
         <GeoMap
@@ -54,10 +51,10 @@ export default function Home() {
           setDisplayMap={setDisplayMap}
           className={`${
             displayMap ? "flex" : "hidden lg:flex"
-          } basis-7/12 flex-col lg:w-[700] lg:flex-shrink-0.8 lg:flex-grow-1`}
+          } flex-col h-[90vh] lg:basis-[700px] lg:flex-shrink-0.8 lg:flex-grow-1`}
         />
       </div>
       {renderForm()}
-    </>
+    </div>
   );
 }

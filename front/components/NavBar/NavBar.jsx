@@ -31,7 +31,7 @@ export function NavBar() {
     <>
       <div
         className="
-            px-4 shadow-2xl h-18 w-full bg-white flex place-items-center place-content-between "
+            px-4 shadow-2xl h-[15vh] w-full bg-white flex place-items-center place-content-between "
       >
         <div id="Logo" className="flex h-16 place-items-center">
           <Image

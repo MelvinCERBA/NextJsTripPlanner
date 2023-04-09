@@ -4,13 +4,18 @@ import { Divider } from "@/components";
 import { joinClasses } from "@/commands";
 
 export const ActivityRecapMd = ({
-  label = "Nom de l'activité",
-  adress = "Adresse de l'activité",
-  price = 0,
-  desc = "Description de l'activité",
-  link = "/",
+  label,
+  adress,
+  price,
+  desc,
+  link,
+  date,
   className,
 }) => {
+  const full_date = new Date(date);
+  const month = full_date.toLocaleString("fr", { month: "short" });
+  const day = full_date.getDay();
+
   return (
     <div
       id="activity"
@@ -23,12 +28,12 @@ export const ActivityRecapMd = ({
         id="activity_header"
         className="flex w-full max-h-[50px] items-center gap-2"
       >
-        <div id="hour_container" className="aspect-square h-full">
-          <span className=" font-bold text-3xl ">
-            {" "}
-            16h
-            <br />
-            30
+        <div
+          id="hour_container"
+          className="aspect-square flex flex-col justify-center h-full "
+        >
+          <span className=" font-bold text-xl ">
+            {day} {month}
           </span>
         </div>
         <Divider type="vertical" className=" h-4/5 "></Divider>

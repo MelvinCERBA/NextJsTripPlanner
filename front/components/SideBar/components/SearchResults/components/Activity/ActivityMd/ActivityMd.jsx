@@ -5,15 +5,7 @@ import defaultImg from "/public/default_activity_image.jpg";
 import Image from "next/image";
 import { joinClasses } from "@/commands";
 
-export const ActivityMd = ({
-  label,
-  adress,
-  price,
-  desc,
-  link,
-  className,
-  setSelectedActivity,
-}) => {
+export const ActivityMd = ({ label, adress, price, desc, link, className }) => {
   return (
     <div
       id="activity"
@@ -44,7 +36,7 @@ export const ActivityMd = ({
           adress={adress}
           desc={desc}
           link={link}
-        ></ActivityTitle>
+        />
       </div>
       <div
         id="info"
@@ -53,7 +45,7 @@ export const ActivityMd = ({
         <p id="desc" className="block-with-text">
           {desc}
         </p>
-        <AddActivityButton setSelectedActivity={setSelectedActivity} />
+        <AddActivityButton activity={{ label, adress, price, desc, link }} />
       </div>
     </div>
   );

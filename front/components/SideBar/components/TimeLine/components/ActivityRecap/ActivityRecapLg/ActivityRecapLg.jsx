@@ -15,7 +15,6 @@ export const ActivityRecapLg = ({
   className,
 }) => {
   const full_date = new Date(date);
-  console.log(`ActivityRecap : full_date = ${JSON.stringify(full_date)}`);
   const month = full_date.toLocaleString("fr", { month: "short" });
   const day = full_date.getDay();
 
