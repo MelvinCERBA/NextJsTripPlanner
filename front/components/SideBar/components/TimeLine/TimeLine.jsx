@@ -13,7 +13,7 @@ export function TimeLine() {
   function handleClickSave(e) {
     e.stopPropagation();
     setTravel({ ...Travel, name: TravelName });
-    saveTravel(Travel);
+    saveTravel({ ...Travel, name: TravelName });
     console.log(`TIMELINE : Travel saved ${1}`);
   }
 
