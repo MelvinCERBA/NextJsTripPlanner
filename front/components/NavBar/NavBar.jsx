@@ -8,7 +8,8 @@ import { ApiContext, DisplayContext } from "@/contexts";
 
 export function NavBar() {
   const { DisplayForm, setDisplayForm } = useContext(DisplayContext);
-  const { AuthConnected, userDataHandler } = useContext(ApiContext);
+  const { AuthConnected, userDataHandler, fetchTravels, Travels } =
+    useContext(ApiContext);
 
   function handleClickLogIn(e) {
     setOpenMenu(false);
@@ -23,6 +24,12 @@ export function NavBar() {
   function handleClickDisconnect(e) {
     e.stopPropagation();
     userDataHandler("", "", { register: false, disconnect: true });
+  }
+  async function handleClickVoyages(e) {
+    e.stopPropagation;
+    await fetchTravels();
+    console.log(`fetched travels : ${JSON.stringify(Travels)}`);
+    setDisplayForm("choose-travel");
   }
 
   const [menuOpen, setOpenMenu] = useState(false);
@@ -54,7 +61,7 @@ export function NavBar() {
           {AuthConnected ? (
             <div className="flex text-orange-main">
               <p
-                onClick={() => setDisplayForm("choose-travel")}
+                onClick={(e) => handleClickVoyages(e)}
                 className="hover:text-orange-secondary"
               >
                 Voyages
@@ -115,7 +122,7 @@ export function NavBar() {
             S&apos;enregistrer
           </p>
           <p
-            onClick={() => setDisplayForm("choose-travel")}
+            onClick={(e) => handleClickVoyages(e)}
             className="text-lg font-bold text-orange-main"
           >
             Mes voyages

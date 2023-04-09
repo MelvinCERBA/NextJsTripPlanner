@@ -10,14 +10,25 @@ export function ChooseTravelForm({ className = "" }) {
   // eslint-disable-next-line no-unused-vars
   const { Travels, setTravel } = useContext(ApiContext);
 
-  useEffect(() => {
-    Travels.map((t) => console.log(`CHOOSETRAVELFORM: travel.name ${t.name}`));
-  }, []);
-
   function handleClickSetTravel(event, travel) {
     setTravel(travel);
     setDisplayForm("");
     setDisplaySearchResults(false);
+  }
+
+  function displayTravels() {
+    if (Travels) {
+      return Travels.map((t) => (
+        <h1
+          key={t.name ? t.name : JSON.stringify(t.steps[0].city)}
+          onClick={(e) => handleClickSetTravel(e, t)}
+          className="text-orange-main hover:text-orange-secondary"
+        >
+          {t.name}
+        </h1>
+      ));
+      // Travels.map((t) => console.log(JSON.stringify(t)));
+    }
   }
   return (
     <>
@@ -35,19 +46,7 @@ export function ChooseTravelForm({ className = "" }) {
             "flex opacity-100 flex-col justify-center z-20 flex-wrap gap-4 w-fit h-fit p-5 rounded-md shadow-xl bg-white ",
           ])}
         >
-          {Travels ? (
-            Travels.map((t) => (
-              <h1
-                key={t.name ? t.name : JSON.stringify(t.steps[0].city)}
-                onClick={(e) => handleClickSetTravel(e, t)}
-                className="text-orange-main hover:text-orange-secondary"
-              >
-                {t.name}
-              </h1>
-            ))
-          ) : (
-            <></>
-          )}
+          {displayTravels()}
         </div>
       </div>
     </>

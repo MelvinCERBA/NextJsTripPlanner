@@ -13,6 +13,7 @@ export function ApiContextWrapper({ children }) {
   const [Travel, setTravel] = useState({ name: "", steps: [] });
   const [ActivityToAdd, setActivityToAdd] = useState();
   const [User, setUser] = useState(null);
+  const [toggleReloadFetch, setToggleReloadFetch] = useState(0);
   const [
     { username, token },
     userDataHandler,
@@ -22,9 +23,9 @@ export function ApiContextWrapper({ children }) {
     AuthConnected,
   ] = useAuth();
 
-  function saveTravelToApi(travel) {
+  async function saveTravelToApi(travel) {
     saveTravel(travel);
-    fetchTravels();
+    await fetchTravels();
   }
 
   const fetchTravels = useCallback(async () => {
@@ -34,6 +35,7 @@ export function ApiContextWrapper({ children }) {
     if (await data[0]) {
       setTravel(await data[0]);
     }
+    dataFetchedRef.current = true;
   }, []);
 
   const dataFetchedRef = useRef(false);
@@ -60,6 +62,7 @@ export function ApiContextWrapper({ children }) {
         AuthConnected,
         saveTravel,
         getTravels,
+        fetchTravels,
       }}
     >
       {children}
