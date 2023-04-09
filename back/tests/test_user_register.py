@@ -39,7 +39,7 @@ def test_user_login_invalid():
         }
     )
 
-    assert response.status_code == 200
+    assert response.status_code == 400
     json_data = response.json()
 
 
@@ -69,13 +69,13 @@ def test_user_profil_bad_token():
         headers = { "X-Token": "Bonjour" }
     )
 
-    assert response_with_bad_token.status_code == 200
+    assert response_with_bad_token.status_code == 422
 
 def test_user_profil_no_token():
     json_response_no_token = {}
     response_with_no_token = requests.get("http://0.0.0.0:8081/user/profile")
 
-    assert response_with_no_token.status_code == 200
+    assert response_with_no_token.status_code == 400
     json_response_no_token = response_with_no_token.json()
 
     assert json_response_no_token["data"]["message"] == "missing token header"

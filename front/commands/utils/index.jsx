@@ -1,3 +1,4 @@
-import { joinClasses } from "./joinClasses";
-import { BREAKPOINTS } from "./breakpoints";
-export { joinClasses, BREAKPOINTS };
+/* istanbul ignore file */
+
+export * from "./joinClasses";
+export * from "./breakpoints";

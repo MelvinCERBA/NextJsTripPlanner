@@ -56,7 +56,7 @@ def test_user_already_registered():
         }
     )
 
-    assert response.status_code == 200
+    assert response.status_code == 400
     json_data = response.json()
 
     assert json_data["data"]["message"] == "username already taken"

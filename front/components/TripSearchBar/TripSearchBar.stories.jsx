@@ -1,7 +1,8 @@
-import { TripSearchBar } from './TripSearchBar';
+import React from "react";
+import { TripSearchBar } from "./TripSearchBar";
 
 export default {
-  title: 'Components/TripSearchBar',
+  title: "Components/TripSearchBar",
   component: TripSearchBar,
 };
 
