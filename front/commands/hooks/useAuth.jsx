@@ -10,47 +10,54 @@ export const useAuth = () => {
   const [username, setUsername] = useState(cookie_userName);
   const [password, setPassword] = useState(undefined);
   const [register, setRegister] = useState(false);
+  const [Loading, setLoading] = useState(false);
+  const [Connected, setConnected] = useState(false);
 
-  async function connectWithToken() {
+  useEffect(() => {
+    console.log(`USEAUTH: connected = ${JSON.stringify(Connected)}`);
+  }, [Connected]);
+
+  async function connectWithToken(token = "") {
+    console.log(`USEAUTH: connecting with token ${token}`);
     try {
       const { data } = await axios.get("http://localhost:8081/user/profile", {
         headers: {
-          "X-Token": cookie_userToken
-        }
+          "X-Token": token,
+          "Access-Control-Allow-Origin": "*",
+        },
       });
-
+      setConnected(true);
+      return data;
     } catch (error) {
       setError(error);
+      return error;
     }
   }
 
   async function connectWithUsernameAndPassword() {
+    console.log("USEAUTH: connecting with username and password");
     try {
-      const { data } = await axios.post(`http://localhost:8081/user/${register ? "register" : "login"}`, { username, password });
+      const { data } = await axios.post(
+        `http://localhost:8081/user/${register ? "register" : "login"}`,
+        { username, password }
+      );
       const token = data.data.token;
 
       try {
-        const { data } = await axios.get("http://localhost:8081/user/profile", {
-          headers: {
-            "X-Token": token
-          }
-        });
+        const data = await connectWithToken(token);
         const u_name = data.data.message.user;
 
-        if (data.code === 200) {
-          setCookieUserName(u_name, {
-            days: 1,
-            SameSite: "Strict",
-            Secure: true,
-          });
+        setCookieUserName(u_name, {
+          days: 1,
+          SameSite: "Strict",
+          Secure: true,
+        });
 
-          setCookieUserToken(token, {
-            days: 1,
-            SameSite: "Strict",
-            Secure: true,
-          });
-        }
-
+        setCookieUserToken(token, {
+          days: 1,
+          SameSite: "Strict",
+          Secure: true,
+        });
       } catch (error) {
         setError(error);
       }
@@ -60,23 +67,45 @@ export const useAuth = () => {
   }
 
   useEffect(() => {
-    if (cookie_userToken) {
-      connectWithToken();
-    }
-    else {
-      connectWithUsernameAndPassword();
-    }
+    (async () => {
+      if (cookie_userToken) {
+        await connectWithToken(cookie_userToken);
+      } else {
+        await connectWithUsernameAndPassword();
+      }
+    })();
+    setLoading(false);
   }, [username, password, register]);
 
-  function userDataHandler(u_name = "", p_word = "", params = { register: false }) {
+  function userDataHandler(
+    u_name = "",
+    p_word = "",
+    params = { register: false, disconnect: false }
+  ) {
+    setLoading(true);
+    if (params.disconnect == true) {
+      console.log(`useAuth disconnect = true ${11}`);
+      disconnect();
+      return;
+    }
     setRegister(params.register);
     setPassword(p_word);
     setUsername(u_name);
   }
 
   function disconnect() {
-    setUserData({});
+    // setUserData({});
+    setConnected(false);
+    setCookieUserToken("");
+    setLoading(false);
   }
 
-  return [{ username: cookie_userName, token: cookie_userToken }, userDataHandler, disconnect, error];
+  return [
+    { username: cookie_userName, token: cookie_userToken },
+    userDataHandler,
+    disconnect,
+    error,
+    Loading,
+    Connected,
+  ];
 };

@@ -145,7 +145,7 @@ async def get_roadtrips(x_token: Union[List[str], None] = Header(default=None)):
                     "result": result
                 },
                 code = 200
-            )
+            ))
         else:
             responder = Responder.Send(
                 data = {

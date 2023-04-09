@@ -8,14 +8,14 @@ const Button = ({
   props,
 }) => {
   const PRIMARY_CLASS =
-    "border px-8 py-3 rounded-lg bg-orange-main text-white text-xl";
+    "border px-5 py-2 rounded-lg bg-orange-main text-white text-lg";
   const SECONDARY_CLASS =
-    "border border-orange-main px-8 py-3 rounded-lg bg-white text-orange-main text-xl";
+    "border border-orange-main px-5 py-2 rounded-lg bg-white text-orange-main text-lg";
 
   return (
     <button
       type="button"
-      className={alternate ? SECONDARY_CLASS : PRIMARY_CLASS}
+      className={alternate === true ? SECONDARY_CLASS : PRIMARY_CLASS}
       onClick={onClick}
       {...props}
     >

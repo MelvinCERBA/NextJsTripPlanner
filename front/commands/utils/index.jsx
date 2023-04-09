@@ -2,3 +2,4 @@
 
 export * from "./joinClasses";
 export * from "./breakpoints";
+export * from "./formatCurrency";

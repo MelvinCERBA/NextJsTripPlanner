@@ -18,6 +18,7 @@ function Input({
   const INPUT_DICT = {
     select: (
       <select
+        key="select-1"
         onChange={onChange}
         value={value}
         id={name}
@@ -32,6 +33,7 @@ function Input({
     ),
     search: (
       <input
+        key="search-2"
         onChange={onChange}
         value={value}
         id={name}
@@ -43,8 +45,8 @@ function Input({
     ),
     text: (
       <input
+        key="text-3"
         onChange={onChange}
-        value={value}
         id={name}
         name={name}
         placeholder={placeholder}
@@ -53,15 +55,49 @@ function Input({
         {...props}
       />
     ),
+    password: (
+      <input
+        key="password-4"
+        onChange={onChange}
+        id={name}
+        name={name}
+        placeholder={placeholder}
+        className={CLASS_NAME}
+        type="password"
+        {...props}
+      />
+    ),
     number: (
       <input
+        key="number-5"
         onChange={onChange}
-        value={value}
         id={name}
         name={name}
         placeholder={placeholder}
         className={CLASS_NAME}
         type="number"
+        {...props}
+      />
+    ),
+    date: (
+      <input
+        onChange={onChange}
+        id={name}
+        name={name}
+        placeholder={placeholder}
+        className={CLASS_NAME}
+        type="date"
+        {...props}
+      />
+    ),
+    datetime: (
+      <input
+        onChange={onChange}
+        id={name}
+        name={name}
+        placeholder={placeholder}
+        className={CLASS_NAME}
+        type="datetime-local"
         {...props}
       />
     ),

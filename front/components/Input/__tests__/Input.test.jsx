@@ -17,7 +17,8 @@ test("it change the input value", async () => {
   const REPLACEMENT_TEXT = "Je veux plutôt ça !";
 
   render(<Input label={LABEL_VALUE} />);
-  await act(async () => {
+
+  act(async () => {
     await userEvent.type(screen.getByLabelText(LABEL_VALUE), REPLACEMENT_TEXT);
   });
 
