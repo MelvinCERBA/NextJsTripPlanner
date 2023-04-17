@@ -8,7 +8,9 @@ export function LogInForm({ className = "" }) {
   const { setDisplayForm } = useContext(DisplayContext);
   const [Pseudo, setPseudo] = useState("");
   const [Mdp, setMdp] = useState("");
-  const [Retry, setRetry] = useState(false);
+  const [retry, setRetry] = useState(false);
+
+  retry;
   // eslint-disable-next-line no-unused-vars
   const { userDataHandler, AuthError, AuthLoading, AuthConnected } =
     useContext(ApiContext);

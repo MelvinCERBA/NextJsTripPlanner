@@ -7,28 +7,30 @@ import {
   AddCityForm,
   ChooseTravelForm,
 } from "@/components";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { NavBar } from "../components/";
 import { DisplayContext } from "@/contexts";
 
 export default function Home() {
   // eslint-disable-next-line no-unused-vars
-  const { displayMap, setDisplayMap, DisplayForm, setDisplayForm } = useContext(DisplayContext);
+  const { displayMap, setDisplayMap, DisplayForm, setDisplayForm } =
+    useContext(DisplayContext);
 
   function renderForm() {
-    switch (DisplayForm) {
-      case "log":
-        return <LogInForm />;
-      case "sign":
-        return <SignInForm />;
-      case "add-activity":
-        return <AddActivityForm />;
-      case "choose-travel":
-        return <ChooseTravelForm />;
-      case "add-city":
-        return <AddCityForm />;
-      default:
-        return <></>;
+    if (DisplayForm === "log") {
+      return <LogInForm />;
+    }
+    if (DisplayForm === "sign") {
+      return <SignInForm />;
+    }
+    if (DisplayForm === "add-activity") {
+      return <AddActivityForm />;
+    }
+    if (DisplayForm === "choose-travel") {
+      return <ChooseTravelForm />;
+    }
+    if (DisplayForm === "add-city") {
+      return <AddCityForm />;
     }
   }
   return (

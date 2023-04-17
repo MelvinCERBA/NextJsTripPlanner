@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
+import React from "react";
 import { formatCurrency } from "@/commands";
 import { Divider } from "@/components";
-import { DisplayContext } from "@/contexts";
 
 export function CityRecap({ city_name, total_price, start, end }) {
-  const { DisplaySearchResults, setDisplaySearchResults } =
-    useContext(DisplayContext);
+  // const { DisplaySearchResults, setDisplaySearchResults } =
+  //   useContext(DisplayContext);
 
   const options = {
     weekday: "short",

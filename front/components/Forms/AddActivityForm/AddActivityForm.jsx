@@ -10,7 +10,7 @@ export function AddActivityForm({ className = "" }) {
   // eslint-disable-next-line no-unused-vars
   const { setDisplaySearchResults, DisplayForm, setDisplayForm } =
     useContext(DisplayContext);
-  const { Travel, setTravel, ActivityToAdd } = useContext(ApiContext);
+  const { setTravel, ActivityToAdd } = useContext(ApiContext);
 
   function handleChangedInputDate(e) {
     const d = new window.Date(e.target.value).toISOString().slice(0, 10);
@@ -39,7 +39,7 @@ export function AddActivityForm({ className = "" }) {
         const start = new window.Date(city.start);
         const end = new window.Date(city.end);
         if (new window.Date(Date) > start && new window.Date(Date) < end) {
-          console.log(`AddActivityForm: city = ${new_travel.steps[i].city}`)
+          console.log(`AddActivityForm: city = ${new_travel.steps[i].city}`);
           new_travel.steps[i].events.push({ ...ActivityToAdd, Date });
           new_travel.steps[i].events.sort(activityDateComparison);
         }

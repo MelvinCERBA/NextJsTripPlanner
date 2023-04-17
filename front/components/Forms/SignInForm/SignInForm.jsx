@@ -12,7 +12,7 @@ export function SignInForm({ className = "" }) {
   const [Mdp, setMdp] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [mdpConfirm, setMdpConfirm] = useState("");
-  const [Retry, setRetry] = useState(false);
+  // const [Retry, setRetry] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const { userDataHandler, AuthError, AuthLoading, AuthConnected } =
     useContext(ApiContext);

@@ -1,6 +1,6 @@
 import React from "react";
 import { joinClasses } from "@/commands/utils";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { DisplayContext, ApiContext } from "@/contexts";
 
 export function ChooseTravelForm({ className = "" }) {

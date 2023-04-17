@@ -1,3 +1,4 @@
+import React from "react";
 import { Activity } from "./ActivityMd";
 
 export default {

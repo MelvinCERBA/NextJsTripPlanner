@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Button } from "../Button";
 // import logo from "@/public/logo-no-background.png";
 import Image from "next/image";
@@ -10,6 +10,8 @@ export function NavBar() {
   const { DisplayForm, setDisplayForm } = useContext(DisplayContext);
   const { AuthConnected, userDataHandler, fetchTravels, Travels } =
     useContext(ApiContext);
+
+  DisplayForm;
 
   function handleClickLogIn(e) {
     setOpenMenu(false);

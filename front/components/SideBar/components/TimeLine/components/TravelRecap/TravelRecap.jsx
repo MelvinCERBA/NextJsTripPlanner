@@ -9,7 +9,6 @@ export function TravelRecap() {
           <h1></h1>
           <Button label="Sauvegarder" />
         </div>
-
       </div>
     </>
   );

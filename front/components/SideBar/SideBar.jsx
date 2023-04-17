@@ -1,5 +1,5 @@
 // import { Activity } from "./components";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { joinClasses } from "../../commands";
 import { GiWorld } from "react-icons/gi";
 import { TimeLine } from "./components";

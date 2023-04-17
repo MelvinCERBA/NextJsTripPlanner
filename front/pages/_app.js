@@ -1,6 +1,10 @@
 import "../styles/main.css";
 import React from "react";
-import { ApiContextWrapper, DisplayContextWrapper, MapContextWrapper } from "@/contexts";
+import {
+  ApiContextWrapper,
+  DisplayContextWrapper,
+  MapContextWrapper,
+} from "@/contexts";
 
 export default function App({ Component, pageProps }) {
   return (

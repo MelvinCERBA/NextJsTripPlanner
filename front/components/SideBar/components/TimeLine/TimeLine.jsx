@@ -8,7 +8,7 @@ export function TimeLine() {
   // eslint-disable-next-line no-unused-vars
   const { Travel, setTravel, saveTravel } = useContext(ApiContext);
   const { setDisplayForm } = useContext(DisplayContext);
-  const [ TravelName, setTravelName] = useState("");
+  const [TravelName, setTravelName] = useState("");
 
   function handleClickSave(e) {
     e.stopPropagation();
